@@ -4,8 +4,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
+import Login from './pages/Login/Login.js';
 
 const styles = theme => ({
   main: {
@@ -21,9 +23,15 @@ const App = ({ classes }) => (
     <CssBaseline />
     <AppHeader />
     <main className={classes.main}>
-      <Home />
+    <Router>
+      <>
+      <Route path="/" exact component={Home} />
+      <Route path="/home" exact component={Home} />
+      <Route path="/Login" exact component={Login} />
+      </>
+    </Router>
     </main>
-  </Fragment>
+    </Fragment>
 );
 
 export default withStyles(styles)(App);
