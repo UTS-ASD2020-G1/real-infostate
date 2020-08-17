@@ -9,6 +9,7 @@ import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
 import Login from './pages/Login/Login.js';
 import Register from './pages/Register/Register.js';
+import Search from './pages/Search/Search.js';
 
 const styles = theme => ({
   main: {
@@ -30,6 +31,7 @@ const App = ({ classes }) => (
       <Route path="/home" exact component={Home} />
       <Route path="/Login" exact component={Login} />
       <Route path="/register" exact component={Register} />
+      <Route path="/search" exact component={Search} />
       </>
     </Router>
     </main>
