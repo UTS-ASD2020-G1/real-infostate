@@ -7,6 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import {
+  Typography,
+} from '@material-ui/core';
+
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -38,7 +42,7 @@ const Register = () => {
         return (
           <div className="App">
             <header className="App-header">
-              <h2>Register Now</h2>
+            <Typography variant="h5">Real-InfoState Register:</Typography>
               <div className="Register">
               <TextField
                   required
