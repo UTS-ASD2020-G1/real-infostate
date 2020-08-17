@@ -14,19 +14,19 @@ const Search = () => {
 
       const searchSuburb = () => { // temporary
         if(suburb === ''){
-          setMessage("Please Enter a Suburb Name/Post Code")
+          setMessage("Please enter a Suburb Name/Post Code")
           setOpen(true)
         }
         else{
-          setMessage("//TODO Display Search Results")
-          setOpen(true)
-        }
+            setMessage("//TODO: needs to verify if suburb exists")
+            setOpen(true)
+          }
       };
 
         return (
           <div className="App">
             <header className="App-header">
-              <h2>Register Now</h2>
+              <h2>Please Enter the suburb name or postcode</h2>
               <div className="Search">
               <TextField
                   required
@@ -34,7 +34,6 @@ const Search = () => {
                   id="outlined-helperText"
                   label="Suburb Name"
                   variant="outlined"
-                  helperText="Enter a Suburb Name/Id/Post Code"
                   InputLabelProps={{
                     shrink: true
                   }}
