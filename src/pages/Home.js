@@ -1,15 +1,29 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 
 import {
   Typography,
+  withStyles,
 } from '@material-ui/core';
 
-export default () => (
-  <div id="home">
-  <Typography variant="h4">Welcome to Real-InfoState! Your new home start here.</Typography>
-  <Typography variant="h5"> Explore new apartments, land estates, house and land, home designs, builders and more.</Typography>
 
-  </div>
+const Info = () => (
+  <div id='home'><Typography variant='h4' style={{
+    background: '/',  color: '/',
+    textAlign: 'center',  margin: "10px auto"}}>
+      Welcome to Real InfoState.</Typography> 
+      <br></br>
+      <h1>Latest Property News</h1>
+      <div class='photostack' style={{margin:"10px 10px", padding:"10px"}}>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      <img src="./house1.jpg" alt="RI-Logo" height="300" width="300"/>
+      </div>
+      </div>
 
-);
+    );
+
+
+export default Info;
