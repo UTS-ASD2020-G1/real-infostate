@@ -6,17 +6,44 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
 import {
   Typography,
+  makeStyles
 } from '@material-ui/core';
 
+const useStyles = makeStyles({
+  App: {
+    textAlign: 'center',
+    backgroundColor: "#ffffff",
+},
+  Appheader: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "10px",
+    color: "white"
+},
+   Login: {
+     display: "flex",
+     flexDirection: "column",
+     alignItems: "center",
+     justifyContent: "center", 
+     padding: "50px"
+},
+     Button: {
+    padding: "40px"
+}
+});
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false)
+
+    const classes = useStyles();
 
       const signIn = () => { // temporary 
         if (username === "react" && password === "password") {
@@ -29,10 +56,10 @@ const Login = () => {
       };
 
         return (
-          <div className="App">
+          <div className={classes.App}>
             <Typography variant="h5">Real-InfoState Login:</Typography>
-            <header className="App-header">
-              <div className="Login">
+            <header className={classes.Appheader}>
+              <div className={classes.Login}>
                 <TextField
                   variant="standard"
                   placeholder="Username"
@@ -51,7 +78,7 @@ const Login = () => {
                   value={password}
                 />
     
-                <div className="Button">
+                <div className={classes.Button}>
                   <Button
                     variant="contained"
                     color="primary"
