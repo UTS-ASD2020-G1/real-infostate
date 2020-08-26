@@ -5,7 +5,10 @@
 
 ## How to use? 
 - App Page: https://real-infostate.herokuapp.com/
-- Local Machine: Node.JS installed. cd to root of project, do 1. npm install 2. npm start.
+- Local Machine: Make sure Node.JS installed. 
+1. cd to root of project
+2. `npm install`
+3. `npm start`
 
 ## Technology Stack
 - Node.JS
