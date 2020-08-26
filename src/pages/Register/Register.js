@@ -22,14 +22,11 @@ const Register = () => {
     const [addressLine2, setAddressLine2] = useState('');
     const [suburb, setSuburb] = useState('');
     const [postCode, setPostCode] = useState('');
-    const [state, setState] = 'New South Wales';
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false)
 
       const signUp = () => { // temporary
-        if(username === '' || firstname === '' || lastname === ''
-        && email === '' || password === '' || addressLine1 === ''
-        && suburb === '' || postCode === ''){
+        if(username === '' || firstname === '' || email === '' || password === '' || addressLine1 === '' || suburb === '' || postCode === ''){
           setMessage("Registration Failed, Complete All Required Fields")
           setOpen(true)
         }
