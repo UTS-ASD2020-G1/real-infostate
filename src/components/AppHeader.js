@@ -3,8 +3,6 @@ import {
   AppBar,
   Button,
   Toolbar,
-  Typography,
-  withStyles,
 } from '@material-ui/core';
 
 
