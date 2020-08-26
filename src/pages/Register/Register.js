@@ -27,9 +27,7 @@ const Register = () => {
     const [open, setOpen] = useState(false)
 
       const signUp = () => { // temporary
-        if(username === '' || firstname === '' || lastname === ''
-        && email === '' || password === '' || addressLine1 === ''
-        && suburb === '' || postCode === ''){
+        if(username === ''){
           setMessage("Registration Failed, Complete All Required Fields")
           setOpen(true)
         }
