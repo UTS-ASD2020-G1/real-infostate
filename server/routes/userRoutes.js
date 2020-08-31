@@ -1,4 +1,3 @@
-// const bcrypt = require('bcrypt');
 const userRouter = require('express').Router();
 let User = require('../models/user');
 
@@ -9,5 +8,4 @@ userRouter.route('/').get( async (req, res, next) => {
     // // .then(users => res.json(users.map(user => user.toJSON())))
     // .catch(error => next(error))
 });
-
 module.exports = userRouter

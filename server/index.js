@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const middleware = require('./utils/middleware');
 const userRouter = require('./routes/userRoutes'); // to use the express routes
+const authRouter = require('./routes/authRoutes'); // to use the express routes
 
 console.log('connecting to mongoDB')
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use('/users',userRouter);
+app.use('/auth',authRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

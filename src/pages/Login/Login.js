@@ -10,6 +10,8 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import axios from 'axios';
+import service from '../../utils/token';
 
 const useStyles = makeStyles({
   App: {
@@ -43,16 +45,30 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false)
 
-    const classes = useStyles();
+    const classes = useStyles();  
 
-      const signIn = () => { // temporary 
-        if (username === "react" && password === "password") {
-          setMessage("You have successfully Logged In!")
-          setOpen(true)
-        } else {
-          setMessage("Incorrect Username or Password!")
-          setOpen(true)
-        }
+      const signIn = () => { 
+          const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
+          .then(response => {
+            window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+            service.setToken(user.token)
+
+            setUsername('');
+            setPassword('');
+            setMessage('Login successful!')
+            setOpen(true)
+
+            // window.location = "/home";
+
+          })
+          .catch(error => {
+            setMessage('Wrong credentials')
+            setOpen(true)
+            setTimeout(() => {
+              setMessage(null);
+              setOpen(false)
+            },5000)
+          })
       };
 
         return (
