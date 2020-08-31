@@ -16,7 +16,8 @@ import Search from './pages/Search/Search.js';
 import BR from './pages/Extra/BR.js';
 import News from './pages/Extra/News.js';
 import NP from './pages/Extra/NP.js';
-;
+
+import AdminLogin from './pages/Admin/login.js';
 
 const styles = theme => ({
   main: {
@@ -38,6 +39,7 @@ const App = ({ classes }) => (
       <Route path="/" exact component={Home} />
       <Route path="/home" exact component={Home} />
       <Route path="/login" exact component={Login} />
+      <Route path="/admin/login" exact component={AdminLogin} />
       <Route path="/logout" exact component={Logout} />
       <Route path="/register" exact component={Register} />
       <Route path="/search" exact component={Search} />
@@ -48,8 +50,7 @@ const App = ({ classes }) => (
     </Router>
     </main>
     <Footer />
-    </Fragment>
-   
+  </Fragment>
 );
 
 export default withStyles(styles)(App);
