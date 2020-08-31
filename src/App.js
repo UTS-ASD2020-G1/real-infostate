@@ -10,6 +10,7 @@ import Info from './components/Info';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login/Login.js';
+import Logout from './pages/Logout';
 import Register from './pages/Register/Register.js';
 import Search from './pages/Search/Search.js';
 import BR from './pages/Extra/BR.js';
@@ -36,7 +37,8 @@ const App = ({ classes }) => (
       <>
       <Route path="/" exact component={Home} />
       <Route path="/home" exact component={Home} />
-      <Route path="/Login" exact component={Login} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/logout" exact component={Logout} />
       <Route path="/register" exact component={Register} />
       <Route path="/search" exact component={Search} />
       <Route path="/News" exact component={News} />

@@ -58,7 +58,7 @@ const Login = () => {
             setMessage('Login successful!')
             setOpen(true)
 
-            // window.location = "/home";
+            window.location = "/home";
 
           })
           .catch(error => {
