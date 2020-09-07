@@ -25,7 +25,7 @@ app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use('/users',userRouter);
 app.use('/auth',authRouter);
-app.user('/admin', adminRouter);
+app.use('/admin', adminRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

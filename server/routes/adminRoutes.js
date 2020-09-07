@@ -1,4 +1,3 @@
-const Admin = require('../models/Admin')
 const User = require('../models/user')
 const adminRouter = require('express').Router()
 
@@ -6,6 +5,18 @@ const adminRouter = require('express').Router()
 adminRouter.get('/users', async (req, res) => {
     const users = await User.find({})
     res.status(200).json(users)
+})
+
+// GET: specific user
+adminRouter.get('/users/:id', async (req, res) => {
+    const user = await User.find({_id: req.params.id})
+    if(user){
+    res.status(200).json(user)
+    } else{
+        res.status(404).json({
+            error: 'User not found'
+        })
+    }
 })
 
 // PUT: edit specific user details
