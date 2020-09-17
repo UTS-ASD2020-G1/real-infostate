@@ -4,9 +4,14 @@ import {
   Button,
   Toolbar,
 } from '@material-ui/core';
+import store from "../store/index";
+import { setUser } from "../store/actions/index";
 
+window.store = store;
+window.setUser = setUser;
 
 const AppHeader = () => {
+  console.log(store.getState())
   return(
     <AppBar position="static" >
     <Toolbar title = "Real-InfoState" style={{background: '#222222'}}>
@@ -19,9 +24,9 @@ const AppHeader = () => {
     </Toolbar>
 
     <div class="InfoBar" style={{background: '222222'}}>
-   <a href="/register"><Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Register</Button> </a>  
-   <a href="/login"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Login </Button> </a>
-   <a href="/logout"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Logout </Button> </a>
+  { store.getState().user ? <a href="/register"><Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Register</Button> </a> : <></> } 
+  { store.getState().user ?  <a href="/login"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Login </Button> </a> : <></> } 
+  { !store.getState().user ?  <a href="/logout"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Logout </Button> </a> : <></> } 
    </div>
    
   </AppBar>
