@@ -9,6 +9,7 @@
 1. cd to root of project
 2. `npm install`
 3. `npm start`
+4. `cd server && nodemon index.js` to run server (temporary way; will find a way to concurrently run client and server together in one line.)
 
 ## Technology Stack
 - Node.JS

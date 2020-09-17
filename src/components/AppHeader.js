@@ -6,8 +6,9 @@ import {
 } from '@material-ui/core';
 
 
-const AppHeader = () => (
-  <AppBar position="static" >
+const AppHeader = () => {
+  return(
+    <AppBar position="static" >
     <Toolbar title = "Real-InfoState" style={{background: '#222222'}}>
     <a href="/"><img src="./michelle-logo.png" alt="RI-Logo" height="70" width="200"/></a>
     &nbsp;&nbsp;&nbsp;
@@ -20,9 +21,11 @@ const AppHeader = () => (
     <div class="InfoBar" style={{background: '222222'}}>
    <a href="/register"><Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Register</Button> </a>  
    <a href="/login"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Login </Button> </a>
+   <a href="/logout"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}> Logout </Button> </a>
    </div>
    
   </AppBar>
-);
+  )
+};
 
 export default AppHeader;
