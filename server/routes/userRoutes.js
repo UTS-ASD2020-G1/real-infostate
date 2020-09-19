@@ -60,6 +60,7 @@ userRouter.post('/create', [
 //@ISSUE: need to get current userID from login Token
 //@FIXED
 userRouter.get('/me', async (req, res) => {
+
   const body = req.body
 
   try{
@@ -77,6 +78,35 @@ userRouter.get('/me', async (req, res) => {
       res.status(500).send('Server Error');
   }
 
+});
+
+userRouter.delete('/delete', async(req, res) => {
+
+  const body = req.body
+
+  try{
+      const user = await User.findByIdAndDelete(body.id);
+
+      res.json({ msg: 'The profile has been deleted'});
+  }catch(err){
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
+
+});
+
+userRouter.put('/update/:id', async(req, res) => {
+
+User.indByIdAndUpdate(req.params.id, { $set: req.body.user }, {new: true})
+.then( updatedUser => {
+    res.status(200).json(updatedUser.toJSON())
+})
+.catch(error => {
+    console.log(error)
+    res.status(500).json({
+        error: 'Something Wrong'
+    })
+})
 });
 
 module.exports = userRouter
