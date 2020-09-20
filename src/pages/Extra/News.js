@@ -12,6 +12,7 @@ const News = () => (
       News</Typography> 
       <br></br>
       </div>
+ 
 
     );
 
