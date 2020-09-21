@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import {
   Typography,
   Dialog,
@@ -7,26 +8,68 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  ListItem,
+  ListItemText,
+  makeStyles
 } from '@material-ui/core';
 
 
+const useStyles = makeStyles({
+  inline: {
+    display: 'inline',
+  },
+});
+
+
 const Search = () => {
-
   const [suburb, setSuburb] = useState('');
+  const [suburbs, setSuburbs] = useState([]);
   const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState(null);
+  const [searchedSuburbs, setSearchedSuburbs] = useState([]);
 
-  const searchSuburb = () => { // temporary
-    if (suburb === '') {
-      setMessage("Please enter a Suburb Name/Post Code")
-      setOpen(true)
-    }
-    else {
-      setMessage("//TODO: needs to verify if suburb exists")
+  useEffect(() => {
+    axios.get('http://localhost:3001/suburb/')
+    .then(response => {
+      console.log(response.data)
+      let sortedSuburbs = response.data.sort((obj1, obj2) => obj1["name"] < obj2["name"] ? -1 : 1)
+      setSearchedSuburbs(sortedSuburbs)
+      setSuburbs(sortedSuburbs)
+    })
+    .catch(error => {
+      console.log(error);
+      setMessage("Failed to get all suburbs. Please try again later.")
+    })
+  }, [])
+
+  const searchSuburb = () => {
+    let searchedSuburb = [];
+
+    if (searchText){
+      const searchTextLowerCase = (searchText || "").toLowerCase();
+    
+      suburbs.map((suburb,i)=>{
+        if ( suburb.name && suburb.name.toLowerCase().includes(searchTextLowerCase)){
+          searchedSuburb.push(suburb);
+        }
+      });
+      
+      if (searchedSuburb.length < 1){
+        setMessage("There is no suburb found in the record.")
+        setOpen(true)
+      } else {
+        setSearchedSuburbs(searchedSuburb);
+        setSearchText(searchText)
+      }
+    } else { 
+      setMessage("Please fill in the suburb you want to search.")
       setOpen(true)
     }
   };
+
+  const classes = useStyles();  
 
   return (
     <div className="App">
@@ -52,21 +95,8 @@ const Search = () => {
             InputLabelProps={{
               shrink: true
             }}
-            onChange={(event) => { setSuburb(event.target.value) }}
-            value={suburb}
-          />&nbsp;&nbsp;&nbsp;
-
-            <TextField
-            required
-            style={{ margin: 8 }}
-            id="outlined-helperText"
-            label="Post Code"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={(event) => { setSuburb(event.target.value) }}
-            value={suburb}
+            onChange={(event) => { setSearchText(event.target.value) }}
+            value={searchText}
           />&nbsp;&nbsp;&nbsp;
 
                 <div className="Button">
@@ -102,6 +132,89 @@ const Search = () => {
           </DialogActions>
         </Dialog>
       </header>
+      <>
+      {
+          searchedSuburbs.map(suburb => (
+            <ListItem>
+              <ListItemText
+                 primary={suburb.name}
+                 secondary={
+                  <React.Fragment>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                     {suburb.description}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      Average Property Cost: &nbsp;
+                     {suburb.averagePropertyCost}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      Transport rate: &nbsp;
+                     {suburb.transportRate}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      Satisfaction rate: &nbsp;
+                     {suburb.satisfactionRate}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      Parking rate: &nbsp;
+                     {suburb.parkingRate}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      Crime rate: &nbsp;
+                     {suburb.crimeRate}
+                </Typography>
+                <br />
+                <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      ATAR Average: &nbsp;
+                     {suburb.atarAverage}
+                </Typography>
+                <br />
+              </React.Fragment>
+           } />
+        </ListItem>
+          ))
+          }
+      </>
     </div>
   );
 }
