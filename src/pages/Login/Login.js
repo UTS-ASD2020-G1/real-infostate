@@ -48,6 +48,11 @@ const Login = () => {
     const classes = useStyles();  
 
       const signIn = () => { 
+        if(!username || !password){ 
+          setMessage("Missing required field!");             
+          setOpen(true);      
+        }
+        else{
           const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
           .then(response => {
             window.localStorage.setItem('loggedInUser', JSON.stringify(user))
@@ -62,13 +67,14 @@ const Login = () => {
 
           })
           .catch(error => {
-            setMessage('Wrong credentials')
+            setMessage('Wrong credentials!')
             setOpen(true)
             setTimeout(() => {
               setMessage(null);
               setOpen(false)
             },5000)
           })
+        }
       };
 
         return (
