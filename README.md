@@ -11,6 +11,7 @@
 3. `node server`
 4. `npm start`
 5. `cd server && nodemon index.js` to run server (temporary way; will find a way to concurrently run client and server together in one line.)
+6. `npm test` for unit tests.
 
 ## Technology Stack
 - Node.JS
