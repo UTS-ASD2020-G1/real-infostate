@@ -18,9 +18,7 @@ const Register = () => {
   const [firstName, setfirstname] = useState('');
   const [lastName, setlastname] = useState('');
   const [addressLine1, setAddressLine1] = useState('');
-  const [addressLine2, setAddressLine2] = useState('');
   const [suburb, setSuburb] = useState('');
-  const [postCode, setPostCode] = useState('');
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -32,8 +30,7 @@ const Register = () => {
       email === '' ||
       password === '' ||
       addressLine1 === '' ||
-      suburb === '' ||
-      postCode === ''
+      suburb === ''
     ) {
       setMessage('Registration Failed, Complete All Required Fields');
       setOpen(true);
@@ -45,14 +42,7 @@ const Register = () => {
           firstName: firstName,
           lastName: lastName,
           email: email,
-          address:
-            addressLine1 +
-            ', ' +
-            addressLine2 +
-            ', ' +
-            suburb +
-            ', ' +
-            postCode,
+          address: addressLine1 + ', ' + suburb + ', ',
           type: 'user',
         })
         .then((response) => {
@@ -62,9 +52,7 @@ const Register = () => {
           setPassword('');
           setEmail('');
           setAddressLine1('');
-          setAddressLine2('');
           setSuburb('');
-          setPostCode('');
 
           setMessage('Sign in successful!');
           setOpen(true);
@@ -179,21 +167,6 @@ const Register = () => {
             }}
             value={addressLine1}
           />
-          <TextField
-            //Street Address line 2
-            style={{ margin: 8 }}
-            id='outlined-helperText'
-            label='Street Addres line 2'
-            variant='outlined'
-            InputLabelProps={{
-              shrink: true,
-            }}
-            fullWidth
-            onChange={(event) => {
-              setAddressLine2(event.target.value);
-            }}
-            value={addressLine2}
-          />
           <br></br>
           <TextField
             //Suburb
@@ -210,23 +183,6 @@ const Register = () => {
               setSuburb(event.target.value);
             }}
             value={suburb}
-          />
-          <TextField
-            //Post Code
-            required
-            style={{ margin: 8 }}
-            id='outlined-helperText'
-            helperText=''
-            label='Post Code'
-            variant='outlined'
-            type='text'
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(event) => {
-              setPostCode(event.target.value);
-            }}
-            value={postCode}
           />
           <TextField
             //State (NSW)
