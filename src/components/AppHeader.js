@@ -17,10 +17,10 @@ const AppHeader = () => {
     <Toolbar title = "Real-InfoState" style={{background: '#222222'}}>
     <a href="/"><img src="./michelle-logo.png" alt="RI-Logo" height="70" width="200"/></a>
     &nbsp;&nbsp;&nbsp;
-    <a href="/BR"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Buy / Rent</Button> </a>  
+    <a href="/FindHome"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find a Home</Button> </a>  
+    <a href="/Agent"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find an Agent</Button> </a>  
     <a href="/news"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>News</Button> </a>  
     <a href="/NP"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>New Property</Button> </a>  
-    <a href="/search"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Search</Button> </a>  
     </Toolbar>
 
     <div class="InfoBar" style={{background: '222222'}}>
