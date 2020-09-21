@@ -12,11 +12,10 @@ import Home from './pages/Home';
 import Login from './pages/Login/Login.js';
 import Logout from './pages/Logout';
 import Register from './pages/Register/Register.js';
-import Search from './pages/Search/Search.js';
-import BR from './pages/Extra/BR.js';
-import News from './pages/Extra/News.js';
-import NP from './pages/Extra/NP.js';
-
+import FindHome from './pages/Search/FindHome.js';
+import Agent from './pages/Agent.js';
+import News from './pages/News.js';
+import NP from './pages/NP.js';
 import AdminLogin from './pages/Admin/login.js';
 import AdminHome from './pages/Admin/home.js';
 import AdminEdit from './pages/Admin/edit.js';
@@ -43,9 +42,9 @@ const App = ({ classes }) => (
       <Route path="/login" exact component={Login} />
       <Route path="/logout" exact component={Logout} />
       <Route path="/register" exact component={Register} />
-      <Route path="/search" exact component={Search} />
+      <Route path="/FindHome" exact component={FindHome} />
       <Route path="/News" exact component={News} />
-      <Route path="/BR" exact component={BR} />
+      <Route path="/Agent" exact component={Agent} />
       <Route path="/NP" exact component={NP} />
       {/* Admin */}
       <Route path="/admin/login" exact component={AdminLogin} />
