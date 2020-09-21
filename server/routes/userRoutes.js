@@ -60,7 +60,7 @@ userRouter.post('/create', [
 //@ISSUE: need to get current userID from login Token
 userRouter.get('/me', async (req, res) => {
   try{
-      const user = await User.findOne({ user: req.user.id }).populate('user', 
+      const user = await User.findOne({ _id: req.user.id }).populate('user', 
           ['firstName', 'lastName', 'email', 'address']
       );
 
