@@ -7,7 +7,8 @@ const propertySchema = new mongoose.Schema({
     type: { type: String },
     address: { type: String },
     description: { type: String },
-    name: { type: String }
+    name: { type: String },
+    url: { type: String }
   });
 
 propertySchema.set('toJSON', {

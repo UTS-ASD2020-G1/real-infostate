@@ -64,8 +64,7 @@ const Search = () => {
         setSearchText(searchText)
       }
     } else { 
-      setMessage("Please fill in the suburb you want to search.")
-      setOpen(true)
+      setSearchedSuburbs(suburbs)
     }
   };
 
