@@ -81,7 +81,7 @@ userRouter.get('/me', async (req, res) => {
   const body = req.body;
 
   try {
-    const user = await User.findOne({ _id: req.user.id }).populate('user', [
+    const user = await User.findOne({ _id: body.id }).populate('user', [
       'firstName',
       'lastName',
       'email',
