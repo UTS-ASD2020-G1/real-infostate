@@ -2,7 +2,7 @@ const userRouter = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 let User = require('../models/user');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 userRouter.route('/').get(async (req, res, next) => {
   const users = await User.find({}).populate('posts', {
@@ -81,7 +81,7 @@ userRouter.get('/me', async (req, res) => {
   const body = req.body;
 
   try {
-    const user = await User.findOne({ _id: req.user.id }).populate('user', [
+    const user = await User.findOne({ _id: body.id }).populate('user', [
       'firstName',
       'lastName',
       'email',
@@ -103,9 +103,9 @@ userRouter.delete('/delete', async (req, res) => {
   const body = req.body;
 
   try {
-    const user = await User.findByIdAndDelete(body.id);
+    const user = await User.findByIdAndRemove(body.id);
 
-    res.json({ msg: 'The profile has been deleted' });
+    res.status(200).json({ msg: 'The profile has been deleted' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -113,7 +113,7 @@ userRouter.delete('/delete', async (req, res) => {
 });
 
 userRouter.put('/update/:id', async (req, res) => {
-  User.indByIdAndUpdate(req.params.id, { $set: req.body.user }, { new: true })
+  User.findByIdAndUpdate(req.params.id, { $set: req.body.user }, { new: true })
     .then((updatedUser) => {
       res.status(200).json(updatedUser.toJSON());
     })
