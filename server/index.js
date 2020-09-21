@@ -5,10 +5,13 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const middleware = require('./utils/middleware');
-const userRouter = require('./routes/userRoutes'); // to use the express routes
-const authRouter = require('./routes/authRoutes'); // to use the express routes
-const adminRouter = require('./routes/adminRoutes'); // to use the express routes
-const suburbRouter = require('./routes/suburbRoutes'); // to use the express routes
+
+// to use the express routes
+const userRouter = require('./routes/userRoutes');
+const authRouter = require('./routes/authRoutes');
+const adminRouter = require('./routes/adminRoutes');
+const suburbRouter = require('./routes/suburbRoutes');
+const propertyRouter = require('./routes/propertyRoutes');
 
 console.log('connecting to mongoDB')
 
@@ -28,6 +31,7 @@ app.use('/users',userRouter);
 app.use('/auth',authRouter);
 app.use('/admin', adminRouter);
 app.use('/suburb', suburbRouter);
+app.use('/property', propertyRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

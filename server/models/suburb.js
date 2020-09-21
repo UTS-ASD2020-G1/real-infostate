@@ -21,4 +21,4 @@ suburbSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('suburb', suburbSchema)
+module.exports = mongoose.model('Suburb', suburbSchema)
