@@ -132,13 +132,13 @@ return(
             <Card className={classes.root}>
             <CardActionArea>
               <CardContent className={classes.card}>
-                  {/* <CardMedia
+                  <CardMedia
                   component="img"
                   alt="Property"
                   height="200"
-                  image={require(`${property.url}`)}
+                  image={property.url}
                   title="Property"
-                /> */}
+                />
                 <Typography gutterBottom variant="h5" component="h2">
                 {property.name}
                 </Typography>
