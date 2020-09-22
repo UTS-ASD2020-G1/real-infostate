@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 let User = require('../models/user');
 const { check, validationResult } = require('express-validator/check');
+const { update } = require('../models/user');
 
 userRouter.route('/').get(async (req, res, next) => {
   const users = await User.find({}).populate('posts', {
@@ -112,31 +113,30 @@ userRouter.delete('/delete', async (req, res) => {
   }
 });
 
-userRouter.put('/update', async (req, res) => {
-  const body = req.body;
-
-  try {
-    const user = await User.findByIdAndUpdate(body.id);
-
-    res.json({ msg: 'The profile has been updated' });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
+userRouter.put("/update/:id", async (req, res) => {
+User.findByIdAndUpdate(
+  req.params.id,
+  {
+    $set: {
+      firstName: req.body.firstName, 
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+    },
+  },
+  { new: true }
+)
+.then((updatedUser) => {
+  res.status(200).json(updatedUser.toJSON);
+})
+.catch((error) => {
+  console.log(error);
+  res.status(500).json(
+    {
+      error:"Something wrong",
+    }
+    );
+  });
 });
-//TODO: update not working properly, need to be fixed
-
-userRouter.put('/update/:id', async (req, res) => {
-  User.findByIdAndUpdate(req.params.id, { $set: req.body.user }, { new: true })
-    .then((updatedUser) => {
-      res.status(200).json(updatedUser.toJSON());
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json({
-        error: 'Something Wrong',
-      });
-    });
-});
-
+ 
 module.exports = userRouter;
