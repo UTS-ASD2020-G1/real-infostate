@@ -112,8 +112,6 @@ userRouter.delete('/delete', async (req, res) => {
   }
 });
 
-
-
 userRouter.put('/update', async (req, res) => {
   const body = req.body;
 
@@ -126,9 +124,9 @@ userRouter.put('/update', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
-//TODO: update not working properly, need to be fixed 
+//TODO: update not working properly, need to be fixed
 
-/*userRouter.put('/update/:id', async (req, res) => {
+userRouter.put('/update/:id', async (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: req.body.user }, { new: true })
     .then((updatedUser) => {
       res.status(200).json(updatedUser.toJSON());
@@ -139,6 +137,6 @@ userRouter.put('/update', async (req, res) => {
         error: 'Something Wrong',
       });
     });
-});*/
+});
 
 module.exports = userRouter;
