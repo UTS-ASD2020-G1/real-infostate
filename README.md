@@ -17,6 +17,8 @@
 - Heroku (Deployment)
 - GitHub (Version Control)
 - Discord (Web Hook)
+- PaperTrail (Logging)
+- CodeShip (CI)
 
 ## API Used
 - 

@@ -51,7 +51,7 @@ mysuburb.insert_one({ "name" : "Strathfield", "crimeRate" : 20.3, "atarAverage" 
 for x in range(25):
     name = raw_input("Name of suburb")
     crime = raw_input("Crime rate of suburb")
-    atar = raw_input("Aaverage atar of suburb")
+    atar = raw_input("Average atar of suburb")
     property = raw_input("Average property of suburb")
     description = raw_input("Description of suburb")
     transport = raw_input("Transport rate of suburb")
