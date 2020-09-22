@@ -19,6 +19,8 @@ import NP from './pages/NP.js';
 import AdminLogin from './pages/Admin/login.js';
 import AdminHome from './pages/Admin/home.js';
 import AdminEdit from './pages/Admin/edit.js';
+import ReadCurrentUser from './pages/User/read.js';
+import EditCurrentUser from './pages/User/edit.js';
 
 const styles = theme => ({
   main: {
@@ -46,6 +48,8 @@ const App = ({ classes }) => (
       <Route path="/News" exact component={News} />
       <Route path="/Agent" exact component={Agent} />
       <Route path="/NP" exact component={NP} />
+      <Route path="/user/read" exact component={ReadCurrentUser}/>
+      <Route path="/user/edit" exact component={EditCurrentUser}/>
       {/* Admin */}
       <Route path="/admin/login" exact component={AdminLogin} />
       <Route path="/admin/home" exact component={AdminHome} />
