@@ -28,7 +28,7 @@ describe('Create a registered user', function() {
 describe('Get specific registered user account', function() {
   it('Should get the corresponding user account', function() {
     request(app)
-    .get('/users/me')
+    .get('/users/read')
     .send({ id: "5f3a0c9141edb8a12b521644" }) // depends what you want to get
     .expect(200)
     .set('Accept', 'application/json')
