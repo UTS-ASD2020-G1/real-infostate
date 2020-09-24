@@ -1,3 +1,4 @@
+[![Codeship Status for UTS-ASD2020-G1/real-infostate](https://app.codeship.com/projects/e663d820-c7e0-0138-1e51-1232d25739bd/status?branch=master)](https://app.codeship.com/projects/406838)
 # 41026 Real-InfoState
 
 ## A Real Estate + Life Companion 

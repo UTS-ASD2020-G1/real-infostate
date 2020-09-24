@@ -1,3 +1,4 @@
+// User can register their account
 import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
@@ -6,10 +7,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from 'axios';
-
 import { Typography } from '@material-ui/core';
-//import { set } from '../../../server';
+import axios from 'axios';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -22,19 +21,13 @@ const Register = () => {
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
 
+  // create new user
   const signUp = () => {
-    // temporary
-    if (
-      username === '' ||
-      firstName === '' ||
-      email === '' ||
-      password === '' ||
-      addressLine1 === '' ||
-      suburb === ''
-    ) {
+    // if required field is empty
+    if (username === '' || firstName === '' || email === '' || password === '' || addressLine1 === '' || suburb === '') {
       setMessage('Registration Failed, Complete All Required Fields');
       setOpen(true);
-    } else {
+    } else { // else create user
       const newUser = axios
         .post('http://localhost:3001/users/create/', {
           username: username,

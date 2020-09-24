@@ -1,3 +1,4 @@
+// FAKE ADMIN DATA BEFORE MIGRATING TO MONGODB
 export default [ 
     {
         "firstName" : "John",

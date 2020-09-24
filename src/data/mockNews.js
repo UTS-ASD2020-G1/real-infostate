@@ -1,3 +1,4 @@
+// FAKE NEWS DATA BEFORE MIGRATING TO MONGODB
 export default [ 
     {
         "title" : "NSW Government changes stamp duty rules for first-home buyers to prop up economy",

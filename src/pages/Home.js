@@ -12,18 +12,18 @@ import {
   Grid
 } from '@material-ui/core';
 
-import mockNews from "../data/mockNews";
+import homestuff from "../data/homestuff";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
-    margin: 10
+    maxWidth: 500,
+    margin: 50
   },
   heading: {
     marginLeft: 10
   },
   card: {
-    height: 300
+    height: 200
   }
 });
 
@@ -42,38 +42,35 @@ return(
       Welcome to Real InfoState.
       </Typography> 
       <br></br>
-      <h1 className={classes.heading}>Latest Property News</h1>
       <Grid container direction="row">
-      { mockNews.map(news => { 
+      { homestuff.map(home => { 
         return(
             <Card className={classes.root}>
             <CardActionArea>
               <CardMedia
                 component="img"
-                alt="Real Estate"
-                height="140"
-                image={require(`../images/${news.image}.jpeg`)}
-                title="Real Estate"
+                alt="home"
+                height="250"
+                image={require(`../agentImages/${home.image}.jpg`)}
+                title="home"
               />
               <CardContent className={classes.card}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {news.title}
+                  {home.name}
                 </Typography>
                 <Typography gutterBottom variant="subtitle2">
-                By {news.author}
+                 {home.type}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                {news.heading}
+                {home.stuff}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
-                Share
+              <Button onClick="window.location='/Agent.js'" size="small" color="primary">
+                Check Out
               </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
+           
             </CardActions>
           </Card>
       ) 

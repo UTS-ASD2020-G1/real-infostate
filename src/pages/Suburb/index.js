@@ -1,3 +1,4 @@
+// User can find suburbs
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import {
@@ -23,17 +24,17 @@ const useStyles = makeStyles({
 
 
 const Search = () => {
-  const [suburb, setSuburb] = useState('');
-  const [suburbs, setSuburbs] = useState([]);
-  const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false);
-  const [searchText, setSearchText] = useState(null);
-  const [searchedSuburbs, setSearchedSuburbs] = useState([]);
+  const [suburbs, setSuburbs] = useState([]); // all suburbs
+  const [message, setMessage] = useState(''); // feecback message
+  const [open, setOpen] = useState(false); // feedback opener
+  const [searchText, setSearchText] = useState(null); // what user search
+  const [searchedSuburbs, setSearchedSuburbs] = useState([]); // all suburbs based on user's search
 
+  // get all suburbs
   useEffect(() => {
     axios.get('http://localhost:3001/suburb/')
     .then(response => {
-      console.log(response.data)
+      // sort suburbs
       let sortedSuburbs = response.data.sort((obj1, obj2) => obj1["name"] < obj2["name"] ? -1 : 1)
       setSearchedSuburbs(sortedSuburbs)
       setSuburbs(sortedSuburbs)
@@ -41,12 +42,15 @@ const Search = () => {
     .catch(error => {
       console.log(error);
       setMessage("Failed to get all suburbs. Please try again later.")
+      setOpen(true)
     })
   }, [])
 
+  // search suburb
   const searchSuburb = () => {
     let searchedSuburb = [];
 
+    // if search bar is not empty
     if (searchText){
       const searchTextLowerCase = (searchText || "").toLowerCase();
     
@@ -56,14 +60,15 @@ const Search = () => {
         }
       });
       
+      // if there is no suburbs found
       if (searchedSuburb.length < 1){
         setMessage("There is no suburb found in the record.")
         setOpen(true)
-      } else {
+      } else { // if there is display all searched ones
         setSearchedSuburbs(searchedSuburb);
         setSearchText(searchText)
       }
-    } else { 
+    } else {  // if search bar not empty set all suburbs as the searched ones
       setSearchedSuburbs(suburbs)
     }
   };
@@ -84,41 +89,35 @@ const Search = () => {
       <header className="App-header">
         <h2>Find a Home</h2>
         <div className="Search">
-
           <TextField
             required
             style={{ margin: 8 }}
             id="outlined-helperText"
             label="Suburb Name"
             variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
+            InputLabelProps={{shrink: true}}
             onChange={(event) => { setSearchText(event.target.value) }}
             value={searchText}
           />&nbsp;&nbsp;&nbsp;
-
-                <div className="Button">
+          <div className="Button">
             <Button  style={{
-    background: '/',  color: "/",
-    textAlign: 'right',  margin: " auto"}}
+              background: '/',  
+              color: "/",
+              textAlign: 'right',  
+              margin: " auto"}}
               variant="contained"
               color="primary"
               onClick={() => {
                 searchSuburb();
-              }}
-            >
-              Search
-                  </Button>
+              }}>Search</Button>
           </div>
         </div>
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
           aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">Search Output Fail</DialogTitle>
+          aria-describedby="alert-dialog-description">
+          <DialogTitle id="alert-dialog-title">Error</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               {message}
@@ -211,8 +210,8 @@ const Search = () => {
               </React.Fragment>
            } />
         </ListItem>
-          ))
-          }
+        ))
+        }
       </>
     </div>
   );

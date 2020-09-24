@@ -1,5 +1,4 @@
-// Need to have 3 parameters except the last middleware only need 2
-
+// Log all requests that is being sent
 const requestLogger = (request, response, next) => {
     console.log('Method:', request.method)
     console.log('Path:  ', request.path)
@@ -8,10 +7,12 @@ const requestLogger = (request, response, next) => {
     next()
   }
   
+  // If the API endpoint doesn't exist
   const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
   }
-  
+
+  // common error will pass this and print a humanly readable error
   const errorHandler = (error, request, response, next) => {
     console.error(error.message)
   
@@ -25,6 +26,7 @@ const requestLogger = (request, response, next) => {
     next(error)
   }
 
+  // get token from a body object
   const tokenExtractor = (request, response, next) => {
       const authorisation = request.get('authorization')
       if(authorisation && authorisation.toLowerCase().startsWith('bearer ')){

@@ -1,3 +1,4 @@
+// FAKE SUBURB DATA BEFORE MIGRATING TO MONGODB
 export default [ 
     {
         "name" : "Chippendale", 
