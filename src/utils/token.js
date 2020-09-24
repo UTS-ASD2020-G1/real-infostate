@@ -1,5 +1,4 @@
-import axios from 'axios'
-
+// for token purposes
 let token = null 
 
 const setToken = newToken => {
