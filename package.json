@@ -35,6 +35,7 @@
   },
   "scripts": {
     "start": "cd ./server && node index.js",
+    "build" : "react-scripts build",
     "heroku-postbuild": "npm install && npm run build",
     "test": "mocha 'server/tests/*.test.js'",
     "eject": "react-scripts eject"
