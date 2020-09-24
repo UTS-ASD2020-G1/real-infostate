@@ -45,41 +45,43 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false)
 
-    const classes = useStyles();  
+    const signIn = () => { 
+      if(!username || !password){ 
+        setMessage("Missing required field!");             
+        setOpen(true);      
+      }
+      else{
+        const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
+        .then(response => {
+          window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+          service.setToken(user.token)
 
-      const signIn = () => { 
-        if(!username || !password){ 
-          setMessage("Missing required field!");             
-          setOpen(true);      
-        }
-        else{
-          const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
-          .then(response => {
-            window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-            service.setToken(user.token)
+          setUsername('');
+          setPassword('');
+          setMessage('Login successful!')
+          setOpen(true)
 
-            setUsername('');
-            setPassword('');
-            setMessage('Login successful!')
-            setOpen(true)
-
-            setTimeout(() => {
-              window.location = "/home"
-            },1000)          })
-          .catch(error => {
-            setMessage('Wrong credentials!')
-            setOpen(true)
-            setTimeout(() => {
-              setMessage(null);
-              setOpen(false)
-            },5000)
+          // go to user home
+          setTimeout(() => {
+            window.location = "/home"
+          },1000)         
           })
-        }
-      };
+        .catch(error => {
+          setMessage('Wrong credentials!')
+          setOpen(true)
+          setTimeout(() => {
+            setMessage(null);
+            setOpen(false)
+          },5000)
+        })
+      }
+    };
+
+    const classes = useStyles();  
 
         return (
           <div className={classes.App}>
-            <Typography variant="h5">Real-InfoState Login:</Typography>
+            <Typography variant="h5">Real-InfoState User Login:</Typography>
             <header className={classes.Appheader}>
               <div className={classes.Login}>
                 <TextField

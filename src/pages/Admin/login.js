@@ -47,6 +47,10 @@ const Login = () => {
 
     // log in as admin
     const signIn = () => { 
+      if(!username || !password){ 
+        setMessage("Missing required field!");             
+        setOpen(true);      
+      }
         const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'admin'})
         .then(response => {
           window.localStorage.setItem('loggedInUser', JSON.stringify(user))
@@ -58,8 +62,9 @@ const Login = () => {
           setOpen(true)
 
           // go to admin home
-          window.location = "/admin/home";
-
+          setTimeout(() => {
+            window.location = "/admin/home"
+          },1000) 
         })
         .catch(error => {
           setMessage('Wrong credentials')
