@@ -45,32 +45,33 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false)
 
+    // log in as admin
+    const signIn = () => { 
+        const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'admin'})
+        .then(response => {
+          window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+          service.setToken(user.token)
+
+          setUsername('');
+          setPassword('');
+          setMessage('Login successful!')
+          setOpen(true)
+
+          // go to admin home
+          window.location = "/admin/home";
+
+        })
+        .catch(error => {
+          setMessage('Wrong credentials')
+          setOpen(true)
+          setTimeout(() => {
+            setMessage(null);
+            setOpen(false)
+          },5000)
+        })
+    };
+
     const classes = useStyles();  
-
-      const signIn = () => { 
-          const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'admin'})
-          .then(response => {
-            window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-            service.setToken(user.token)
-
-            setUsername('');
-            setPassword('');
-            setMessage('Login successful!')
-            setOpen(true)
-
-            // go to admin home
-            // window.location = "/home";
-
-          })
-          .catch(error => {
-            setMessage('Wrong credentials')
-            setOpen(true)
-            setTimeout(() => {
-              setMessage(null);
-              setOpen(false)
-            },5000)
-          })
-      };
 
         return (
           <div className={classes.App}>
@@ -101,8 +102,7 @@ const Login = () => {
                     color="primary"
                     onClick={() => {
                       signIn();
-                    }}
-                  >
+                    }}>
                     Log In
                   </Button>
                 </div>
@@ -111,8 +111,7 @@ const Login = () => {
                 open={open}
                 onClose={() => setOpen(false)}
                 aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
+                aria-describedby="alert-dialog-description">
                 <DialogTitle id="alert-dialog-title">Sign In</DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
