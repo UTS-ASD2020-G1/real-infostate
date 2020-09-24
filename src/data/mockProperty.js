@@ -1,3 +1,4 @@
+// FAKE PROPERTY DATA BEFORE MIGRATING TO MONGODB
 export default [ 
     {
         "name" : "Cassia",

@@ -1,3 +1,4 @@
+// FAKE USER DATA BEFORE MIGRATING TO MONGODB
 export default [ 
     {
         "firstName" : "Michelle", 
