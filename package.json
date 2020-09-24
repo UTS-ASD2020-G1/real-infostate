@@ -34,8 +34,8 @@
     "yarn": "1.22.x"
   },
   "scripts": {
-    "start": "npm start",
-    "build": "react-scripts build \"cd ./server && node index.js && node server\"",
+    "start": "concurrently \"react-scripts start\" \"cd ./server && node index.js && node server\"",
+    "build": "react-scripts build",
     "test": "mocha 'server/tests/*.test.js'",
     "eject": "react-scripts eject"
   },
