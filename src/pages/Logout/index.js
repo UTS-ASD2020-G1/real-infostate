@@ -1,3 +1,4 @@
+// User and Admin can logout of the system
 import React, { useState, useEffect } from 'react';
 
 const Logout = () => {
