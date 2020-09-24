@@ -1,3 +1,4 @@
+// Entry point to navigate to different functionalities of the website
 import React from 'react';
 
 import {
@@ -12,22 +13,22 @@ import {
   Grid
 } from '@material-ui/core';
 
-import mockNews from "../data/mockNews";
+import homeimages from "../../data/homeImages";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
-    margin: 10
+    maxWidth: 500,
+    margin: 50
   },
   heading: {
     marginLeft: 10
   },
   card: {
-    height: 300
+    height: 200
   }
 });
 
-const Info = () => {
+const Home = () => {
 
 const classes = useStyles();
 
@@ -39,41 +40,38 @@ return(
       color: '/',
       textAlign: 'center',  
       margin: "10px auto"}}>
-     News
+      Welcome to Real InfoState.
       </Typography> 
       <br></br>
-      <h1 className={classes.heading}>News</h1>
       <Grid container direction="row">
-      { mockNews.map(news => { 
+      { homeimages.map(home => { 
         return(
             <Card className={classes.root}>
             <CardActionArea>
               <CardMedia
                 component="img"
-                alt="Real Estate"
-                height="140"
-                image={require(`../images/${news.image}.jpeg`)}
-                title="Real Estate"
+                alt="home"
+                height="250"
+                image={require(`../../images/${home.image}.jpg`)}
+                title="home"
               />
               <CardContent className={classes.card}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {news.title}
+                  {home.name}
                 </Typography>
                 <Typography gutterBottom variant="subtitle2">
-                By {news.author}
+                 {home.type}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                {news.heading}
+                {home.owner}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
-                Share
+              <Button onClick={() => { window.location = home.url }} size="small" color="primary">
+                Check Out
               </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
+           
             </CardActions>
           </Card>
       ) 
@@ -84,4 +82,4 @@ return(
        )
     }
 
-export default Info;
+export default Home;

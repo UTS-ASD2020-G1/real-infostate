@@ -23,9 +23,9 @@ const useStyles = makeStyles({
 });
 
 
-const Search = () => {
+const Suburb = () => {
   const [suburbs, setSuburbs] = useState([]); // all suburbs
-  const [message, setMessage] = useState(''); // feecback message
+  const [message, setMessage] = useState(''); // feedback message
   const [open, setOpen] = useState(false); // feedback opener
   const [searchText, setSearchText] = useState(null); // what user search
   const [searchedSuburbs, setSearchedSuburbs] = useState([]); // all suburbs based on user's search
@@ -131,8 +131,7 @@ const Search = () => {
         </Dialog>
       </header>
       <>
-      {
-          searchedSuburbs.map(suburb => (
+      { searchedSuburbs.map(suburb => (
             <ListItem>
               <ListItemText
                  primary={suburb.name}
@@ -217,4 +216,4 @@ const Search = () => {
   );
 }
 
-export default Search;
+export default Suburb;

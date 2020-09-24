@@ -1,3 +1,5 @@
+// User can find agents
+// extra functions
 import React from 'react';
 import {
   Typography,
@@ -10,7 +12,7 @@ import {
   Button,
   Grid
 } from '@material-ui/core';
-import mockAgents from "../data/mockAgents";
+import mockAgents from "../../data/mockAgents";
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles({
   }
 });
 
-const FindAgents = () => {
+const Agent = () => {
 
 const classes = useStyles();
 
@@ -50,7 +52,7 @@ return(
               component="img"
               alt="Agent"
               height="200"
-              image={require(`../agentImages/${agents.image}.jpg`)}
+              image={require(`../../images/${agents.image}.jpg`)}
               title="Agent"
             />
               <CardContent className={classes.card}>
@@ -82,4 +84,4 @@ return(
        )
     }
 
-export default FindAgents;
+export default Agent;

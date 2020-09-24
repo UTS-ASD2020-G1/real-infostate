@@ -1,3 +1,4 @@
+// User can search for properties
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import {
@@ -29,59 +30,62 @@ const useStyles = makeStyles({
     marginLeft: 10
   },
   card: {
-    height: 500
+    height: 700
   },
   inline: {
     display: 'inline',
   }
 });
 
-const Info = () => {
+const Property = () => {
 
-  const [property, setProperty] = useState('');
-  const [properties, setProperties] = useState([]);
-  const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false);
-  const [searchText, setSearchText] = useState(null);
-  const [searchedProperties, setSearchedProperties] = useState([]);
-
-useEffect(() => {
-  axios.get('http://localhost:3001/property/')
-  .then(response => {
-    console.log(response.data)
-    let sortedProperties = response.data.sort((obj1, obj2) => obj1["name"] < obj2["name"] ? -1 : 1)
-    setSearchedProperties(sortedProperties)
-    setProperties(sortedProperties)
-  })
-  .catch(error => {
-    console.log(error);
-    setMessage("Failed to get all properties. Please try again later.")
-  })
-}, [])
-
-const searchProperty = () => {
-  let searchedProperty = [];
-
-  if (searchText){
-    const searchTextLowerCase = (searchText || "").toLowerCase();
+  const [properties, setProperties] = useState([]); // all properties
+  const [message, setMessage] = useState(''); // feedback message
+  const [open, setOpen] = useState(false); // feedback opener
+  const [searchText, setSearchText] = useState(null); // what user search
+  const [searchedProperties, setSearchedProperties] = useState([]); // all properties based on user's search
   
-    properties.map((property,i)=>{
-      if ( property.address && property.address.toLowerCase().includes(searchTextLowerCase)){
-        searchedProperty.push(property);
-      }
-    });
-    
-    if (searchedProperty.length < 1){
-      setMessage("There is no property found in the record.")
+  // get all properties
+  useEffect(() => {
+    axios.get('http://localhost:3001/property/')
+    .then(response => {
+      // sort properties
+      let sortedProperties = response.data.sort((obj1, obj2) => obj1["name"] < obj2["name"] ? -1 : 1)
+      setSearchedProperties(sortedProperties)
+      setProperties(sortedProperties)
+    })
+    .catch(error => {
+      setMessage("Failed to get all properties. Please try again later.")
       setOpen(true)
-    } else {
-      setSearchedProperties(searchedProperty);
-      setSearchText(searchText)
+    })
+  }, [])
+
+  // search property
+  const searchProperty = () => {
+    let searchedProperty = [];
+
+    // if search bar is not empty
+    if (searchText){
+      const searchTextLowerCase = (searchText || "").toLowerCase();
+    
+      properties.map((property,i)=>{
+        if ( property.address && property.address.toLowerCase().includes(searchTextLowerCase)){
+          searchedProperty.push(property);
+        }
+      });
+
+      // if there is no properties found
+      if (searchedProperty.length < 1){
+        setMessage("There is no property found in the record.")
+        setOpen(true)
+      } else { // if there is display all searched ones
+        setSearchedProperties(searchedProperty);
+        setSearchText(searchText)
+      }
+    } else {  // if search bar not empty set all properties as the searched ones
+      setSearchedProperties(properties);
     }
-  } else { 
-    setSearchedProperties(properties);
-  }
-};
+  };
 
 const classes = useStyles();
 
@@ -93,7 +97,7 @@ return(
       color: '/',
       textAlign: 'center',  
       margin: "10px auto"}}>
-     New Property
+      New Property
       </Typography> 
       <br></br>
       <h1 className={classes.heading}>Find a Property</h1>
@@ -114,8 +118,10 @@ return(
 
                 <div className="Button">
             <Button  style={{
-    background: '/',  color: "/",
-    textAlign: 'right',  margin: " auto"}}
+              background: '/',  
+              color: "/",
+              textAlign: 'right',  
+              margin: " auto"}}
               variant="contained"
               color="primary"
               onClick={() => {
@@ -198,4 +204,4 @@ return(
        )
     }
 
-export default Info;
+export default Property;
