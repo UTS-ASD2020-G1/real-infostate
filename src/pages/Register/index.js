@@ -13,6 +13,7 @@ import axios from 'axios';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [firstName, setfirstname] = useState('');
   const [lastName, setlastname] = useState('');
@@ -24,10 +25,21 @@ const Register = () => {
   // create new user
   const signUp = () => {
     // if required field is empty
-    if (username === '' || firstName === '' || email === '' || password === '' || addressLine1 === '' || suburb === '') {
+    if (
+      username === '' ||
+      firstName === '' ||
+      email === '' ||
+      password === '' ||
+      addressLine1 === '' ||
+      suburb === ''
+    ) {
       setMessage('Registration Failed, Complete All Required Fields');
       setOpen(true);
-    } else { // else create user
+    } else if (password !== confirmPassword) {
+      setMessage('Password does not match');
+      setOpen(true);
+    } else {
+      // else create user
       const newUser = axios
         .post('http://localhost:3001/users/create/', {
           username: username,
@@ -125,6 +137,24 @@ const Register = () => {
               setPassword(event.target.value);
             }}
             value={password}
+          />
+          <br></br>
+          <TextField
+            //Confirm Password
+            required
+            style={{ margin: 8 }}
+            id='outlined-helperText'
+            label='Confirm Password'
+            type='password'
+            variant='outlined'
+            InputLabelProps={{
+              shrink: true,
+            }}
+            fullWidth
+            onChange={(event) => {
+              setConfirmPassword(event.target.value);
+            }}
+            value={confirmPassword}
           />
           <br></br>
           <TextField

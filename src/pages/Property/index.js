@@ -188,7 +188,7 @@ return(
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Error</DialogTitle>
+          <DialogTitle id="alert-dialog-title">Search Output Fail</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               {message}

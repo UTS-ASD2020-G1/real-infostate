@@ -4,7 +4,6 @@ import {
   Button,
   Toolbar,
 } from '@material-ui/core';
-import logo from "../images/michelle-logo.png"
 
 const AppHeader = () => {
   const loggedUserJSON = window.localStorage.getItem('loggedInUser') // get current session user
@@ -12,7 +11,7 @@ const AppHeader = () => {
   return(
     <AppBar position="static" >
       <Toolbar title = "Real-InfoState" style={{background: '#222222'}}>
-        <a href="/"><img src={logo} alt="RI-Logo" height="70" width="200"/></a>
+        <a href="/"><img src="./michelle-logo.png" alt="RI-Logo" height="70" width="200"/></a>
         &nbsp;&nbsp;&nbsp;
         <a href="/find/suburbs"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find Home</Button> </a>  
         <a href="/find/agents"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find an Agent</Button> </a>  
