@@ -34,8 +34,8 @@
     "yarn": "1.22.x"
   },
   "scripts": {
-    "start": "npm start",
-    "build": "react-scripts build \"cd ./server && node index.js && node server\"",
+    "start": "cd ./server && node index.js",
+    "heroku-postbuild": "cd src && npm install && npm run build",
     "test": "mocha 'server/tests/*.test.js'",
     "eject": "react-scripts eject"
   },
