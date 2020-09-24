@@ -23,7 +23,7 @@ const Logout = () => {
     if(user){
         return(
             <div>
-                {user.username} have successfully log out. Redirecting....
+                 you have successfully log out. Redirecting....
                 {setTimeout(() => {
                  window.location="/home";
                 },5000)}
