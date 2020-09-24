@@ -9,7 +9,7 @@ const Footer = () => (
     bottom: '0', 
     textAlign: 'center',  
     margin: "auto"}}>
-    <a href="admin/login">Admin Login</a>
+    <a style={{ color: "blue" }} onClick={(event) => window.location = "/admin/login"}>Admin Login</a>
     <br />
     © 2020 Advanced Software Development Spring Group 3 
 </footer>
