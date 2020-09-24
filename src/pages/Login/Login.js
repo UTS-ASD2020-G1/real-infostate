@@ -63,9 +63,9 @@ const Login = () => {
             setMessage('Login successful!')
             setOpen(true)
 
-            window.location = "/home";
-
-          })
+            setTimeout(() => {
+              window.location = "/home"
+            },1000)          })
           .catch(error => {
             setMessage('Wrong credentials!')
             setOpen(true)
