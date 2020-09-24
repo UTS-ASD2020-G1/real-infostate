@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs'); // encryption
-const { check, validationResult } = require('express-validator'); //Validator to validate
+const { check, validationResult } = require('express-validator');
 
 let User = require('../models/user');
 const userRouter = require('express').Router();
