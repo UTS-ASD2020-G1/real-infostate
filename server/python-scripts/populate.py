@@ -1,4 +1,6 @@
 ## Author: Michelle Tanoto
+## TO INSERT FAKE DATA TO DATABASE
+
 from bs4 import BeautifulSoup
 import pymongo
 import dns

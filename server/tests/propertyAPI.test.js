@@ -1,3 +1,4 @@
+// AUTOMATED TESTING FOR PROPERTY ROUTES
 const request = require('supertest');
 const app = require('../index.js');
 

@@ -1,3 +1,4 @@
+// ADMIN MODEL
 const mongoose = require('mongoose')
 
 const adminSchema = new mongoose.Schema({
@@ -25,8 +26,7 @@ adminSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-    // password should not be revealed
-    delete returnedObject.password 
+    delete returnedObject.password // password should not be revealed
   }
 })
 

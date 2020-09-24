@@ -13,6 +13,7 @@ const adminRouter = require('./routes/adminRoutes');
 const suburbRouter = require('./routes/suburbRoutes');
 const propertyRouter = require('./routes/propertyRoutes');
 
+// connecting to MongoDB
 console.log('connecting to mongoDB');
 
 mongoose
@@ -24,18 +25,19 @@ mongoose
     console.log('error connection to MongoDB:', error.message);
   });
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(middleware.requestLogger);
-app.use(middleware.tokenExtractor);
+app.use(cors()); // enable cross-origin source
+app.use(bodyParser.json()); // extract entire body-portion of the request stream and expose it in request.body
+app.use(middleware.requestLogger); // log all requests
+app.use(middleware.tokenExtractor); // get token from request's body
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
 app.use('/suburb', suburbRouter);
 app.use('/property', propertyRouter);
-app.use(middleware.unknownEndpoint);
-app.use(middleware.errorHandler);
+app.use(middleware.unknownEndpoint); // in case requests are from unknown endpoint
+app.use(middleware.errorHandler); // handle common error
 
+// Connecting server port
 app.listen(config.PORT || 8081, () => {
   console.log(`Server is running on port: ${config.PORT}`);
 });

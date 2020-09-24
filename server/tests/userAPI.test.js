@@ -1,3 +1,4 @@
+// AUTOMATED TESTING FOR USER ROUTES
 const request = require('supertest');
 const app = require('../index.js');
 
