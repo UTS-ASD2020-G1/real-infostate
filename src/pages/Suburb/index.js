@@ -3,16 +3,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import {
   Typography,
-  Dialog,
-  Button,
+  makeStyles,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
   TextField,
+  Button,
+  Grid,
+  Dialog,
+  ListItem,
+  ListItemText,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  ListItem,
-  ListItemText,
-  makeStyles
 } from '@material-ui/core';
 
 
@@ -130,88 +136,54 @@ const Suburb = () => {
           </DialogActions>
         </Dialog>
       </header>
-      <>
-      { searchedSuburbs.map(suburb => (
-            <ListItem>
-              <ListItemText
-                 primary={suburb.name}
-                 secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                     {suburb.description}
+      <Grid container direction="row">
+      { searchedSuburbs.map(suburb => { 
+        return(
+            <Card className={classes.root}>
+            <CardActionArea>
+              <CardContent className={classes.card}>
+                  {/* <CardMedia
+                  component="img"
+                  alt="suburb"
+                  height="200"
+                  image={suburb.url}
+                  title="suburb"
+                /> */}
+                <Typography gutterBottom variant="h5" component="h2">
+                {suburb.name}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Average Property Cost: &nbsp;
-                     {suburb.averagePropertyCost}
+                <Typography gutterBottom variant="subtitle2">
+                 {suburb.description}
+                <Typography variant="body2" color="textSecondary" component="p">
+                Average Property Cost: {suburb.averagePropertyCost}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Transport rate: &nbsp;
-                     {suburb.transportRate}
+                <Typography variant="body2" color="textSecondary" component="p">
+                Transport Rate: {suburb.transportRate}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Satisfaction rate: &nbsp;
-                     {suburb.satisfactionRate}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Parking rate: &nbsp;
-                     {suburb.parkingRate}
+                <Typography variant="body2" color="textSecondary" component="p">
+               Satisfaction Rate: $ {suburb.satisfactionRate}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Crime rate: &nbsp;
-                     {suburb.crimeRate}
+                <Typography variant="body2" color="textSecondary" component="p">
+              Parking Rate: {suburb.parkingRate}
                 </Typography>
-                <br />
-                <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      ATAR Average: &nbsp;
-                     {suburb.atarAverage}
+                <Typography variant="body2" color="textSecondary" component="p">
+               Crime Rate: {suburb.crimeRate}
                 </Typography>
-                <br />
-              </React.Fragment>
-           } />
-        </ListItem>
-        ))
-        }
-      </>
+                <Typography variant="body2" color="textSecondary" component="p">
+              Atar: {suburb.atarAverage}
+                </Typography>
+                
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+        
+            </CardActions>
+          </Card>
+      ) 
+    }) 
+  }
+    </Grid>
     </div>
   );
 }
