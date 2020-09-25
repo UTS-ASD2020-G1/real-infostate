@@ -61,13 +61,15 @@ const Register = () => {
           setAddressLine1('');
           setSuburb('');
 
-          setMessage('Sign in successful!');
+          setMessage('Your account has been registered!');
           setOpen(true);
 
           window.location = '/home';
-        });
-      setMessage('Your account has been registered!');
-      setOpen(true);
+        })
+        .catch(error => {
+          setMessage('Your account failed to be registered!');
+          setOpen(true);
+        })
     }
   };
 
