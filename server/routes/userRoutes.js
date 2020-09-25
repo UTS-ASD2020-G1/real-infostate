@@ -133,10 +133,14 @@ userRouter.delete('/delete', async (req, res) => {
   }
 });
 
+//UPDATE: update the specific user
 userRouter.put('/update/:id', async (req, res) => {
+
+  
   User.findByIdAndUpdate(
-    req.params.id,
+    req.params.id,//match user by id 
     {
+      //update the user data
       $set: {
         firstName: req.body.firstName,
         lastName: req.body.lastName,

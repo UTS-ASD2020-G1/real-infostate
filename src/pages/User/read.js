@@ -16,8 +16,13 @@ const useStyles = makeStyles({
 
 const Read = () => {
 
-  const [value, setValue] = useState('')
-  const [users, setUsers] = useState([])
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [address, setAddress] = useState('');
+  const [message, setMessage] = useState('') 
+  const [open, setOpen] = useState(false) 
   
   useEffect(() => {
     axios
@@ -25,7 +30,11 @@ const Read = () => {
     .then(response => {
       console.log('Yeet users are fetched!')
       console.log(response.data)
-      setUsers(response.data)
+      setFirstName(response.data[0].firstName)
+      setLastName(response.data[0].lastName)
+      setEmail(response.data[0].email)
+      setUsername(response.data[0].username)
+      setAddress(response.data[0].address)
     })
   }, [])
 
@@ -46,11 +55,17 @@ const Read = () => {
   const classes = useStyles();  
 
   return (
-    users.map(user => (
-      
       <div>
+        <h1>User data shown below</h1>
+        <table>
+        <tr><td>Username: {username}</td></tr>
+        <tr><td>Last Name: {lastName}</td></tr>
+        <tr><td>First Name: {firstName}</td></tr>
+        <tr><td>Email: {email}</td></tr>
+        <tr><td>Address: {address}</td></tr>
+        </table>
+        <Button className={classes.button} variant="contained" color="primary" href={`/user/edit`}>Edit</Button>
         </div>
-    ))
   );
 }
 
