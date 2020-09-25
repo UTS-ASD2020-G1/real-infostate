@@ -33,7 +33,8 @@ authRouter.post('/login', async (req,res) => {
     res.status(200).send({
         token, 
         username: user.username, 
-        id: user._id
+        id: user._id,
+        user: user
     })
     // Admin login 
 } else if(body.type == 'admin') {
@@ -60,7 +61,8 @@ authRouter.post('/login', async (req,res) => {
     res.status(200).send({
         token, 
         username: admin.username, 
-        id: admin._id
+        id: admin._id,
+        user: admin
     })
 } else {
     // if user type is not included

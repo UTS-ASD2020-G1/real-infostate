@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Edit = (props) => {
+const UserEdit = (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,21 +26,27 @@ const Edit = (props) => {
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('') // error message
   const [open, setOpen] = useState(false) // open prompt
+  const [user, setUser] = useState({}); // current logged in user
 
-  //edit the user data 
+  // get current logged in user
   useEffect(() => {
-    axios
-    .get(`http://localhost:3001/users/read`)
-    .then(response => {
-      console.log('User are fetched successfully!')
-      console.log(response.data)
-      setFirstName(response.data[0].firstName)
-      setLastName(response.data[0].lastName)
-      setEmail(response.data[0].email)
-      setUsername(response.data[0].username)
-      setAddress(response.data[0].address)
-    })
-  }, [])
+    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+    if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON);
+        setUser(user);
+        axios
+        .get(`http://localhost:3001/users/${user.id}`)
+        .then(response => {
+          console.log('User are fetched successfully!')
+          console.log(response.data)
+          setFirstName(response.data[0].firstName)
+          setLastName(response.data[0].lastName)
+          setEmail(response.data[0].email)
+          setUsername(response.data[0].username)
+          setAddress(response.data[0].address)
+        })     
+    }
+}, [])
 
   //update the user data 
   const updateUser = (event) => {
@@ -56,10 +62,10 @@ const Edit = (props) => {
     }
 
     axios
-    .put(`http://localhost:3001/users/update/${props.match.params.id}`, { user: updateUser } )
+    .put(`http://localhost:3001/users/${user.id}`, { user: updateUser } )
     .then(response => {
       console.log('User are updated successsfully')
-      window.location='/user/edit'
+      window.location='/home'
     })
     .catch(error => {
       setMessage('Users failed to be updated. Please try again.');
@@ -112,7 +118,7 @@ const Edit = (props) => {
           onChange={(event) => setAddress(event.target.value)} />
           <br />
       <Button className={classes.button} variant="contained" color="primary" onClick={(event) => updateUser(event)}>Save</Button>
-      <Button className={classes.button} variant="contained" color="secondary" href={`/user/read`}>Cancel</Button>
+      <Button className={classes.button} variant="contained" color="secondary" href={`/home`}>Cancel</Button>
           <Dialog
           open={open}
           onClose={() => setOpen(false)}
@@ -135,4 +141,4 @@ const Edit = (props) => {
       );
 }
 
-export default Edit;
+export default UserEdit;

@@ -20,8 +20,7 @@ import Suburb from './pages/Suburb';
 import Agent from './pages/Agent';
 import News from './pages/News';
 import Property from './pages/Property';
-import ReadCurrentUser from './pages/User/read.js';
-import EditCurrentUser from './pages/User/edit.js';
+import UserEdit from './pages/User';
 
 // Admin
 import AdminLogin from './pages/Admin/login.js';
@@ -55,8 +54,7 @@ const App = ({ classes }) => (
       <Route path="/news" exact component={News} />
       <Route path="/find/agents" exact component={Agent} />
       <Route path="/find/properties" exact component={Property} />
-      <Route path="/user/read" exact component={ReadCurrentUser}/>
-      <Route path="/user/edit" exact component={EditCurrentUser}/>
+      <Route path="/user/edit" exact component={UserEdit}/>
       {/* Admin */}
       <Route path="/admin/login" exact component={AdminLogin} />
       <Route path="/admin/home" exact component={AdminHome} />

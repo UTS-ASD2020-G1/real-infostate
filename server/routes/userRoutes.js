@@ -91,28 +91,15 @@ userRouter.post(
 );
 
 // GET: get specific user as an user
-userRouter.get('/read', async (req, res) => {
-  const body = req.body;
+userRouter.get('/:id', async (req, res) => {
+  const user = await User.find({_id: req.params.id}) // find specific user with id field
 
-  try {
-    // find user with the corresponding id
-    const user = await User.findOne({ _id: body.id }).populate('user', [
-      'firstName',
-      'lastName',
-      'email',
-      'address',
-    ]);
-
-    // if not found return feedback to user
-    if (!user) {
-      res.status(400).json({ msg: 'There is no profile for this user' });
-    }
-    // else return that user object
-    res.status(200).json(user);
-  } catch (err) {
-    // if operation error return feedback
-    console.error(err.message);
-    res.status(500).send('Server Error');
+  if (user) { // if user found return that
+  res.status(200).json(user)
+  } else { // else return user feedback 
+      res.status(404).json({
+          error: 'User not found!'
+      })
   }
 });
 
@@ -134,31 +121,18 @@ userRouter.delete('/delete', async (req, res) => {
 });
 
 //UPDATE: update the specific user
-userRouter.put('/update/:id', async (req, res) => {
-
-  
-  User.findByIdAndUpdate(
-    req.params.id,//match user by id 
-    {
-      //update the user data
-      $set: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        address: req.body.address,
-      },
-    },
-    { new: true }
-  )
-    .then((updatedUser) => {
-      res.status(200).json(updatedUser.toJSON);
+userRouter.put('/:id', async (req, res) => {
+    // update user who has the matching id with the field that wants to be updated on req.body.user
+    User.findByIdAndUpdate( req.params.id, { $set: req.body.user }, { new: true })
+    .then( updatedUser => {
+        res.status(200).json(updatedUser.toJSON())
     })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json({
-        error: 'Something wrong',
-      });
-    });
+    .catch(error => { // return user feedback if operation does not suceed
+        console.log(error)
+        res.status(500).json({
+            error: 'Something Wrong'
+        })
+    })
 });
 
 module.exports = userRouter;

@@ -54,7 +54,7 @@ const Login = () => {
       else{
         const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
         .then(response => {
-          window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+          window.localStorage.setItem('loggedInUser', JSON.stringify(response.data.user))
           service.setToken(user.token)
 
           setUsername('');
