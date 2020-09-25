@@ -18,20 +18,34 @@ const Register = () => {
   const [lastName, setlastname] = useState('');
   const [addressLine1, setAddressLine1] = useState('');
   const [suburb, setSuburb] = useState('');
+  const [password2, setPassword2] = useState('');
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
 
   // create new user
   const signUp = () => {
     // if required field is empty
-    if (username === '' || firstName === '' || email === '' || password === '' || addressLine1 === '' || suburb === '') {
+    if (
+      username === '' ||
+      firstName === '' ||
+      email === '' ||
+      password === '' ||
+      addressLine1 === '' ||
+      suburb === '' ||
+      password2 === ''
+    ) {
       setMessage('Registration Failed, Complete All Required Fields');
       setOpen(true);
-    } else { // else create user
+    } else if (password2 !== password) {
+      setMessage('Password is not the same, please confirm password');
+      setOpen(true);
+    } else {
+      // else create user
       const newUser = axios
         .post('http://localhost:3001/users/create/', {
           username: username,
           password: password,
+          password2: password2,
           firstName: firstName,
           lastName: lastName,
           email: email,
@@ -119,12 +133,32 @@ const Register = () => {
             variant='outlined'
             InputLabelProps={{
               shrink: true,
+              minLength: '6',
             }}
             fullWidth
             onChange={(event) => {
               setPassword(event.target.value);
             }}
             value={password}
+          />
+          <br></br>
+          <TextField
+            //Confirm Password
+            required
+            style={{ margin: 8 }}
+            id='outlined-helperText'
+            label='Confirm Password'
+            type='password'
+            variant='outlined'
+            InputLabelProps={{
+              shrink: true,
+              minLength: '6',
+            }}
+            fullWidth
+            onChange={(event) => {
+              setPassword2(event.target.value);
+            }}
+            value={password2}
           />
           <br></br>
           <TextField
