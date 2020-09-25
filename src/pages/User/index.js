@@ -72,6 +72,28 @@ const UserEdit = (props) => {
       setOpen(true)
     })
   }
+
+    // delete specific user
+    const deleteUser = (event) => {
+        event.preventDefault();
+
+        if (window.confirm('Are you sure you want to delete your account?')) {
+            axios
+            .delete(`http://localhost:3001/users/${user.id}`)
+            .then(response => {
+              console.log('User is deleted successfully')
+              window.localStorage.removeItem('loggedOutUser');
+              window.localStorage.clear();
+              window.location = '/home'
+            })
+            .catch(error => {
+              setMessage('Users failed to be deleted. Please try again.');
+              setOpen(true)    
+            })
+          } else {
+            // Do nothing!
+          }    
+      }
   
   const classes = useStyles();  
   return (
@@ -118,6 +140,7 @@ const UserEdit = (props) => {
           onChange={(event) => setAddress(event.target.value)} />
           <br />
       <Button className={classes.button} variant="contained" color="primary" onClick={(event) => updateUser(event)}>Save</Button>
+      <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteUser(event)}>Delete</Button>
       <Button className={classes.button} variant="contained" color="secondary" href={`/home`}>Cancel</Button>
           <Dialog
           open={open}

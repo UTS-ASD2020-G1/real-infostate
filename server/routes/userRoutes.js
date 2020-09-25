@@ -104,20 +104,17 @@ userRouter.get('/:id', async (req, res) => {
 });
 
 // DELETE: delete the specific user
-userRouter.delete('/delete', async (req, res) => {
-  const body = req.body;
-
+userRouter.delete('/:id', async (req, res) => {
   try {
-    // delete user by that specific id
-    await User.findByIdAndDelete(body.id);
-
-    // return feedback to user
-    res.status(200).json({ msg: 'The profile has been deleted' });
-  } catch (err) {
-    // if operation error return feedback
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
+    // delete user who has the matching id
+    await User.findByIdAndRemove(req.params.id);
+    res.status(204).end();
+} catch(error){ // return user feedback if operation does not suceed
+    console.log(error)
+    res.status(500).json({
+        error: 'Something Wrong'
+    })
+}
 });
 
 //UPDATE: update the specific user

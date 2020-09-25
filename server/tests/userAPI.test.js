@@ -41,8 +41,7 @@ describe('Get specific registered user account', function() {
 describe('Delete registered user account', function() {
   it('Should delete the corresponding user account', function() {
     request(app)
-    .delete('/users/delete')
-    .send({ id: "5f6492c14d250e17cdc6cc03" }) // depends what you want to delete
+    .delete('/users/5f6492c14d250e17cdc6cc03') // depends what you want to delete
     .expect(200)
     .set('Accept', 'application/json')
     .end(function(err, res) {
