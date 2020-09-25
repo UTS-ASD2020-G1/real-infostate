@@ -29,8 +29,7 @@ describe('Create a registered user', function() {
 describe('Get specific registered user account', function() {
   it('Should get the corresponding user account', function() {
     request(app)
-    .get('/users/read')
-    .send({ id: "5f3a0c9141edb8a12b521644" }) // depends what you want to get
+    .get('/users/5f3a0c9141edb8a12b521644') // depends what you want to get
     .expect(200)
     .set('Accept', 'application/json')
     .end(function(err, res) {
@@ -55,7 +54,7 @@ describe('Delete registered user account', function() {
 describe('Update registered user account', function() {
   it('Should update the corresponding user account', function() {
     request(app)
-    .put("/users/update/5f6492884d250e17cdc6cc02") // depends what you want to update
+    .put("/users/5f6492884d250e17cdc6cc02") // depends what you want to update
     .send({ firstName: "Michelle" }) // depends what you want to update
     .expect(200)
     .set('Accept', 'application/json')
