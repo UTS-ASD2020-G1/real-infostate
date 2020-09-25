@@ -22,11 +22,12 @@ const Edit = (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('') // error message
   const [open, setOpen] = useState(false) // open prompt
 
-  // edit specific user as an admin
+  //edit the user data 
   useEffect(() => {
     axios
     .get(`http://localhost:3001/users/read`)
@@ -36,11 +37,12 @@ const Edit = (props) => {
       setFirstName(response.data[0].firstName)
       setLastName(response.data[0].lastName)
       setEmail(response.data[0].email)
+      setUsername(response.data[0].username)
       setAddress(response.data[0].address)
     })
   }, [])
 
-  // update specific user as an admin
+  //update the user data 
   const updateUser = (event) => {
     event.preventDefault()
 
@@ -49,17 +51,18 @@ const Edit = (props) => {
       firstName: firstName,
       lastName: lastName,
       email: email,
+      username: username,
       address: address
     }
 
     axios
     .put(`http://localhost:3001/users/update/${props.match.params.id}`, { user: updateUser } )
     .then(response => {
-      console.log('personal details updated successfully')
+      console.log('User are updated successsfully')
       window.location='/user/edit'
     })
     .catch(error => {
-      setMessage('Failed to update personal details');
+      setMessage('Users failed to be updated. Please try again.');
       setOpen(true)
     })
   }
@@ -91,6 +94,14 @@ const Edit = (props) => {
           defaultValue="None" 
           value={email} 
           onChange={(event) => setEmail(event.target.value)} />
+          <br />
+          <TextField 
+          required 
+          id="standard-required" 
+          label="Username" 
+          defaultValue="None" 
+          value={username} 
+          onChange={(event) => setUsername(event.target.value)} />
           <br />
           <TextField 
           required 
