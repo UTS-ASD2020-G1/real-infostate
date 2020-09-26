@@ -80,7 +80,7 @@ userRouter.post(
       //Save User object to database
       await user.save();
       //Return the user details
-      return res.json(user);
+      return res.status(200).json({ user: user });
     } catch (err) {
       //Catch error and display err paramater
       console.error(err.message);

@@ -26,6 +26,12 @@ const useStyles = makeStyles({
   inline: {
     display: 'inline',
   },
+  card: {
+    width: window.innerWidth,
+  },
+  root: {
+    marginBottom: 20
+  }
 });
 
 
@@ -154,24 +160,25 @@ const Suburb = () => {
                 </Typography>
                 <Typography gutterBottom variant="subtitle2">
                  {suburb.description}
+                 </Typography>
+                 <br />
                 <Typography variant="body2" color="textSecondary" component="p">
-                Average Property Cost: {suburb.averagePropertyCost}
+                <b>Average Property Cost:</b> $ {suburb.averagePropertyCost}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                Transport Rate: {suburb.transportRate}
-                </Typography>
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-               Satisfaction Rate: $ {suburb.satisfactionRate}
+                <b>Transport Rate:</b> {suburb.transportRate}%
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-              Parking Rate: {suburb.parkingRate}
+                <b>Satisfaction Rate:</b> {suburb.satisfactionRate}%
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-               Crime Rate: {suburb.crimeRate}
+                <b>Parking Rate:</b> {suburb.parkingRate}%
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-              Atar: {suburb.atarAverage}
+                <b>Crime Rate:</b> {suburb.crimeRate}%
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                <b>Atar:</b> {suburb.atarAverage}%
                 </Typography>
                 
               </CardContent>

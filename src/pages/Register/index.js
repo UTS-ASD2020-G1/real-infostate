@@ -53,7 +53,7 @@ const Register = () => {
           type: 'user',
         })
         .then((response) => {
-          window.localStorage.setItem('loggedInUser', JSON.stringify(newUser));
+          window.localStorage.setItem('loggedInUser', JSON.stringify(response.data.user));
 
           setUsername('');
           setPassword('');
