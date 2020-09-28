@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    address: String
+    address: String,
+    loginAttempts: { type: Number, required: true, default: 0 }
   });
 
 userSchema.set('toJSON', {

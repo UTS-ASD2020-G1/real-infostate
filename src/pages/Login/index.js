@@ -54,6 +54,10 @@ const Login = () => {
       else{
         const user = axios.post('http://localhost:3001/auth/login/', {"username" : username, "password" : password, "type" : 'user'})
         .then(response => {
+          if(response.data.loginAttempts){ // if there is more than 5 unsuccessful attempt
+            setMessage('Account locked as there is more than 5 unsuccessful attempts!')
+            setOpen(true)
+          } else{
           window.localStorage.setItem('loggedInUser', JSON.stringify(response.data.user))
           service.setToken(user.token)
 
@@ -65,9 +69,9 @@ const Login = () => {
           // go to user home
           setTimeout(() => {
             window.location = "/home"
-          },1000)         
-          })
-        .catch(error => {
+          },1000)
+        }      
+      }).catch(error => {
           setMessage('Wrong credentials!')
           setOpen(true)
           setTimeout(() => {

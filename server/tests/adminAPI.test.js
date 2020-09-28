@@ -49,3 +49,15 @@ describe('Delete registered user account', function() {
       });
     });
   });
+
+describe('Get all logs', function() {
+  it('Should return all logs from database', function() {
+    request(app)
+    .get('/admin/logs/')
+    .expect(200)
+    .end(function(err, res) {
+      if (err) throw err;
+    });
+  });
+});
+  

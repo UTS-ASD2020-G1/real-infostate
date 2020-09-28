@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Log = require('../models/log');
 const adminRouter = require('express').Router()
 
 // GET: get all users as an Admin
@@ -48,5 +49,11 @@ adminRouter.delete('/users/:id', async (req, res) => {
         })
     }
 })
+
+// GET: get all registered user logs as an Admin
+adminRouter.route('/logs').get(async (req, res, next) => {
+    const logs = await Log.find({}).populate('user').exec() // find all log objects
+    res.status(200).json(logs); // return all logs
+  });
 
 module.exports = adminRouter

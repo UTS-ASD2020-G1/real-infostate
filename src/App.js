@@ -26,6 +26,7 @@ import UserEdit from './pages/User';
 import AdminLogin from './pages/Admin/login.js';
 import AdminHome from './pages/Admin/home.js';
 import AdminEdit from './pages/Admin/edit.js';
+import AdminLog from './pages/Admin/log.js';
 
 const styles = theme => ({
   main: {
@@ -59,6 +60,7 @@ const App = ({ classes }) => (
       <Route path="/admin/login" exact component={AdminLogin} />
       <Route path="/admin/home" exact component={AdminHome} />
       <Route path="/admin/user/edit/:id" exact component={AdminEdit} />
+      <Route path="/admin/log" exact component={AdminLog} />
       </>
     </Router>
     </main>
