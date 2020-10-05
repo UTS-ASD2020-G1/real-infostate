@@ -14,4 +14,12 @@ const WishlistSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = Wishlist = mongoose.model('profile', WishlistSchema);
+propertySchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
+
+module.exports = Wishlist = mongoose.model('Wishlist', WishlistSchema);

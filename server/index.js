@@ -12,6 +12,7 @@ const authRouter = require('./routes/authRoutes');
 const adminRouter = require('./routes/adminRoutes');
 const suburbRouter = require('./routes/suburbRoutes');
 const propertyRouter = require('./routes/propertyRoutes');
+const wishlistRouter = require('./routes/wishlistRoutes');
 
 // connecting to MongoDB
 console.log('connecting to mongoDB');
@@ -34,6 +35,7 @@ app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
 app.use('/suburb', suburbRouter);
 app.use('/property', propertyRouter);
+app.use('/wishlist', wishlistRouter);
 app.use(middleware.unknownEndpoint); // in case requests are from unknown endpoint
 app.use(middleware.errorHandler); // handle common error
 
