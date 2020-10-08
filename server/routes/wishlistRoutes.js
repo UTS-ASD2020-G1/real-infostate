@@ -2,14 +2,16 @@ const { check, validationResult } = require('express-validator');
 let User = require('../models/user');
 let Wishlist = require('../models/wishlist');
 let Property = require('../models/property');
+const { route } = require('./userRoutes');
 const wishlistRouter = require('express').Router();
 
 //@route  CREATE wishlist /wishlist/add/
-//@desc   delete profile experience
+//@desc   add property to the wishlist
 //@access Private
 
 wishlistRouter.put(
   '/add',
+  //Validate user_id and property_id must be filled
   [
     check('user_id', 'Your must be a user to create a wishlist')
       .not()
@@ -19,24 +21,30 @@ wishlistRouter.put(
       .isEmpty(),
   ],
   async (req, res, next) => {
+    //Store error in the errros array
     const errors = validationResult(req);
+    //If the errors array is not empty than display the error
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
+    //deconstruct from request body
     const { user_id, property_id } = req.body;
 
+    //Create wishlist object attributes
     const wishlistFields = {};
     if (user_id) wishlistFields.user_id = user_id;
     if (property_id) wishlistFields.property_id = property_id;
 
     try {
+      //Check if the usr exist user_id
       let user = await User.findById({ _id: user_id });
       if (!user) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'User does not exist' }] });
       }
+      //Check if the property exist based on the property_id
       let property = await Property.findById({ _id: property_id });
       if (!property) {
         return res
@@ -44,16 +52,19 @@ wishlistRouter.put(
           .json({ errors: [{ msg: 'Property does not exist' }] });
       }
 
+      //Check if the user has added this to their wishlist already
       let wishlist = await Wishlist.findOne({
         user_id: user_id,
         property_id: property_id,
       });
+      //if it's added than don't add it again
       if (wishlist) {
         return res.status(400).json({
           errors: [{ msg: 'Property already added to wishlist before' }],
         });
       }
 
+      //Create wishlist
       wishlist = new Wishlist(wishlistFields);
       await wishlist.save();
     } catch (err) {
@@ -62,12 +73,54 @@ wishlistRouter.put(
       //500 = internal Server Error
       res.status(500).send('Server Error');
     }
+    //Return user_id and property_id
     res.status(200).json(wishlistFields);
   }
 );
 
-//@route   wishlist /wishlist/add/
-//@desc   delete profile experience
-//@access Private
+//@route  GET /wishlist/view/:user_id
+//@desc   view wishlist of a specific user
 
+wishlistRouter.get('/view/:user_id', async (req, res) => {
+  try {
+    //Find wishlist based on user id in params
+    const wishlist = await Wishlist.find({
+      user_id: req.params.user_id,
+      //Populate results with the attributes of each property in the wishlist
+    }).populate('property_id', [
+      'name',
+      'coordinate',
+      'description',
+      'address',
+      'price',
+      'price',
+      'size',
+      'type',
+      'url',
+    ]);
+    //If there are no results than wishlist is empty
+    if (!wishlist) {
+      return res.status(400).json({ msg: 'Wishlist is empty' });
+    }
+    //Return the wishlist
+    res.json(wishlist);
+  } catch (err) {
+    //Display error message
+    console.error(err.message);
+    //If error message is regarding Object_id than display appropriate message
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Wishlist is empty' });
+    }
+    //Respond with status 500 and server error
+    res.status(500).send('Server Error');
+  }
+});
+
+//@todo
+//@route  DELETE /wishlist/view/
+//@desc   delete a property from wishlist
+
+//@todo
+//@route DELETE /wishlist/clear/
+//@desc  Delete are properties from the wishlist
 module.exports = wishlistRouter;
