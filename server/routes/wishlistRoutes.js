@@ -3,6 +3,7 @@ let User = require('../models/user');
 let Wishlist = require('../models/wishlist');
 let Property = require('../models/property');
 const { route } = require('./userRoutes');
+const wishlist = require('../models/wishlist');
 const wishlistRouter = require('express').Router();
 
 //@route  CREATE wishlist /wishlist/add/
@@ -119,6 +120,22 @@ wishlistRouter.get('/view/:user_id', async (req, res) => {
 //@todo
 //@route  DELETE /wishlist/view/
 //@desc   delete a property from wishlist
+wishlistRouter.delete('/delete/:property_id', async (req, res) => {
+  try {
+    // delete property which has the matching id
+    await wishlist.findByIdAndRemove(req.params._id.property_id);
+    res.status(204).end();
+} catch(error){ // return feedback if operation does not suceed
+    console.log(error)
+    res.status(500).json({
+        error: 'Something Wrong'
+    })
+}
+});
+
+
+
+
 
 //@todo
 //@route DELETE /wishlist/clear/
