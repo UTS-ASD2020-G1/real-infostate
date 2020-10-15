@@ -125,7 +125,7 @@ wishlistRouter.delete('/delete/:user_id', async (req, res) => {
   const user_id = req.params.user_id;
 
   const user = await wishlist.findOne({user_id: user_id});
-  
+
   try {
     // delete property which has the matching id
     await wishlist.findOneAndRemove({user_id: user_id, property_id: property_id});
@@ -143,4 +143,21 @@ wishlistRouter.delete('/delete/:user_id', async (req, res) => {
 //@todo
 //@route DELETE /wishlist/clear/
 //@desc  Delete are properties from the wishlist
+wishlistRouter.delete('/clear/:user_id', async (req, res) => {
+  const user_id = req.params.user_id;
+
+  const user = await wishlist.findOne({user_id: user_id});
+
+  try {
+    // delete property which has the matching id
+    await wishlist.deleteMany({user_id: user_id});
+    res.status(200).send("Your Wishlist is now cleared");
+} catch(error){ // return feedback if operation does not suceed
+    console.log(error)
+    res.status(500).json({
+        error: 'Something Wrong'
+    })
+}
+});
+
 module.exports = wishlistRouter;
