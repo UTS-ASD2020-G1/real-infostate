@@ -13,6 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Box from '@material-ui/core/Box';
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -146,7 +147,15 @@ const Home = () => {
                   variant="body2"
                   className={classes.inline}
                   color="textPrimary">
-                  <b>Status:</b> {log.status == 1 ? 'Success' : 'Failed'}
+                  <b>Status:</b> {log.status == 1 ? 
+                  <Box color="green" clone>
+                    <Typography>Success</Typography>
+                  </Box>
+                  : 
+                  <Box color="red" clone>
+                    <Typography>Failed</Typography>
+                  </Box>
+                  }
                 </Typography>
               </React.Fragment>}/>
                 {/* <Button className={classes.button} variant="contained" color="primary" href={`/admin/user/edit/${user.id}`}>Edit</Button> */}
