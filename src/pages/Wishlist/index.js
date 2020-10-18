@@ -1,16 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import {
-  makeStyles
+  makeStyles,
+  Typography,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  TextField,
+  Button,
+  Grid,
+  Dialog,
+  ListItem,
+  ListItemText,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from 'axios';
 import { selectFields } from 'express-validator/src/select-fields';
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 400,
+    margin: 10
+  },
+  heading: {
+    marginLeft: 10
+  },
+  card: {
+    height: 700
+  },
+  inline: {
+    display: 'inline',
+  }
+});
 
 const Wishlist = (props) => {
 
@@ -21,7 +46,8 @@ const Wishlist = (props) => {
     const [address, setAddress] = useState('');
     const [message, setMessage] = useState('') // error message
     const [open, setOpen] = useState(false) // open prompt
-    const [user, setUser] = useState({}); // current logged in user  
+    const [user, setUser] = useState({}); // current logged in user
+    const [wishlist, setWishlist] = useState([]) // set all wishlist item
 
     useEffect(() => {
       const loggedUserJSON = window.localStorage.getItem('loggedInUser')
@@ -38,13 +64,70 @@ const Wishlist = (props) => {
             setEmail(response.data[0].email)
             setUsername(response.data[0].username)
             setAddress(response.data[0].address)
+
+            axios
+            .get(`http://localhost:3001/wishlist/view/${user.id}`)
+            .then(response => {
+              console.log('Wishlist Loaded')
+              console.log(response.data)
+              setWishlist(response.data)
+            })
+            .catch(error => {
+              setMessage('Wishlist Failed, Please Try Again');
+              setOpen(true)
+            })
           })     
       }
+
   }, [])
+
+  const classes = useStyles();
 
 return (
   <div>
-    <h1>{username}'s Wishlist</h1>
+    <h1>{firstName}'s Wishlist</h1>
+    <Grid container direction="row">
+    { wishlist.map(wishlist => { 
+        return(
+            <Card className={classes.root}>
+            <CardActionArea>
+              <CardContent className={classes.card}>
+                  <CardMedia
+                  component="img"
+                  alt="Property"
+                  height="200"
+                  image={wishlist.property_id.url}
+                  title="Property"
+                />
+                <Typography gutterBottom variant="h5" component="h2">
+                {wishlist.property_id.name}
+                </Typography>
+                <Typography gutterBottom variant="subtitle2">
+                 {wishlist.property_id.description}
+                <Typography variant="body2" color="textSecondary" component="p">
+                Located in: {wishlist.property_id.address}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                Coordinate: {wishlist.property_id.coordinate}
+                </Typography>
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+               Price: $ {wishlist.property_id.price}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+               Size(Sqm): {wishlist.property_id.size}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+               Property Type: {wishlist.property_id.type}
+                </Typography>
+                
+              </CardContent>
+            </CardActionArea>
+          </Card>
+      ) 
+    }) 
+  }
+  </Grid>
   </div>
 );
 }
