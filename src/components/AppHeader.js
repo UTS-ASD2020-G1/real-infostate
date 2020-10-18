@@ -25,6 +25,7 @@ const AppHeader = () => {
       { !loggedUserJSON ? <a href="/login"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Login</Button> </a> : <></>}
       { loggedUserJSON ? <a href="/logout"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Logout</Button> </a> : <></>} 
       { loggedUserJSON ? <a href="/user/edit"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Account</Button> </a> : <></>}
+      { loggedUserJSON ? <a href="/user/wishlist"> <Button style={{background: '#FFFFFF', float: 'right',  margin: "10px"}}>Wishlist</Button> </a> : <></>}
     </div>
   </AppBar>
   )
