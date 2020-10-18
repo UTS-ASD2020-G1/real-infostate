@@ -94,7 +94,6 @@ wishlistRouter.get('/view/:user_id', async (req, res) => {
       'description',
       'address',
       'price',
-      'price',
       'size',
       'type',
       'url',

@@ -28,6 +28,9 @@ import AdminHome from './pages/Admin/home.js';
 import AdminEdit from './pages/Admin/edit.js';
 import AdminLog from './pages/Admin/log.js';
 
+// Wishlist
+import Wishlist from './pages/Wishlist';
+
 const styles = theme => ({
   main: {
     padding: theme.spacing(3),
@@ -61,6 +64,8 @@ const App = ({ classes }) => (
       <Route path="/admin/home" exact component={AdminHome} />
       <Route path="/admin/user/edit/:id" exact component={AdminEdit} />
       <Route path="/admin/log" exact component={AdminLog} />
+      {/* Wishlist */}
+      <Route path="/user/wishlist" exact component={Wishlist} />
       </>
     </Router>
     </main>

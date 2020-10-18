@@ -44,6 +44,8 @@ const Property = () => {
   const [open, setOpen] = useState(false); // feedback opener
   const [searchText, setSearchText] = useState(null); // what user search
   const [searchedProperties, setSearchedProperties] = useState([]); // all properties based on user's search
+  const [user, setUser] = useState({}); // current logged in user  
+  
   
   // get all properties
   useEffect(() => {
@@ -58,6 +60,12 @@ const Property = () => {
       setMessage("Failed to get all properties. Please try again later.")
       setOpen(true)
     })
+
+      const loggedUserJSON = window.localStorage.getItem('loggedInUser') //Get the current user
+      if (loggedUserJSON) {
+          const user = JSON.parse(loggedUserJSON);
+          setUser(user);
+        }     
   }, [])
 
   // search property
@@ -85,6 +93,21 @@ const Property = () => {
     } else {  // if search bar not empty set all properties as the searched ones
       setSearchedProperties(properties);
     }
+  };
+
+  //Add to wishlist
+  const addToWishlist = (propertyId) => {
+
+    axios
+    .put(`http://localhost:3001/wishlist/add`, { user_id: user.id, property_id: propertyId } )
+    .then(response => {
+      console.log('Property Added to Your Wishlist')
+    })
+    .catch(error => {
+      setMessage('Property Failed to be Added to wishlist. Please try again.');
+      setOpen(true)
+    })
+    
   };
 
 const classes = useStyles();
@@ -175,6 +198,13 @@ return(
               </Button>
               <Button size="small" color="primary">
                 Learn More
+              </Button>
+              <Button size="small" color="primary"
+              onClick={() => {
+                addToWishlist(property.id);
+              }}
+              >
+                Add to Wishlist {property.id}
               </Button>
             </CardActions>
           </Card>
