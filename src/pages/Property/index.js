@@ -204,7 +204,7 @@ return(
                 addToWishlist(property.id);
               }}
               >
-                Add to Wishlist {property.id}
+                Add to Wishlist
               </Button>
             </CardActions>
           </Card>
