@@ -81,32 +81,32 @@ const Wishlist = (props) => {
 
   }, [])
 
-  const deleteProperty = (event, user) => {
+
+  const deleteProperty = (event, property_id) => {
     event.preventDefault();
- 
+  
     axios
-    .delete(`http://localhost:3001/whishlist/delete/${user.id}`, {data: { property_id: 'property_id' }})
+    .delete(`http://localhost:3001/wishlist/delete/${user.id}`, {data: { id: property_id}})
     .then(response => {
       console.log('Property is deleted successfully')
-      window.location = '/whishlist/view'
+      window.location = '/user/wishlist'
     })
     .catch(error => {
-      setMessage('Properties failed to be deleted. Please try again.');
+      setMessage('Property failed to be deleted. Please try again.');
       setOpen(true)    
     })
   }
-
-  const deleteWhishlist = (event, user) => {
+  const deleteWishlist = (event, user) => {
     event.preventDefault();
 
     axios
-    .delete(`http://localhost:3001/whishlist/clear/${user.id}`)
+    .delete(`http://localhost:3001/wishlist/clear/${user.id}`)
     .then(response => {
-      console.log('Whishlist is deleted successfully')
-      window.location = '/whishlist/view'
+      console.log('wishlist is deleted successfully')
+      window.location = '/user/wishlist'
     })
     .catch(error => {
-      setMessage('Whishlist failed to be deleted. Please try again.');
+      setMessage('Wishlist failed to be deleted. Please try again.');
       setOpen(true)    
     })
   }
@@ -116,7 +116,7 @@ const Wishlist = (props) => {
 return (
   <div>
     <h1>{firstName}'s Wishlist</h1>
-    <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteWhishlist(event, user)}>Delete all</Button>
+    <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteWishlist(event, user)}>Delete all</Button>
     <Grid container direction="row">
     { wishlist.map(wishlist => { 
         return(
@@ -153,7 +153,7 @@ return (
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteProperty(event, user)}>Delete</Button>
+            <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteProperty(event, wishlist.property_id)}>Delete</Button>
           </Card>
       ) 
     }) 
