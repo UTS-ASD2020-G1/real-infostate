@@ -81,11 +81,42 @@ const Wishlist = (props) => {
 
   }, [])
 
+  const deleteProperty = (event, user) => {
+    event.preventDefault();
+ 
+    axios
+    .delete(`http://localhost:3001/whishlist/delete/${user.id}`, {data: { property_id: 'property_id' }})
+    .then(response => {
+      console.log('Property is deleted successfully')
+      window.location = '/whishlist/view'
+    })
+    .catch(error => {
+      setMessage('Properties failed to be deleted. Please try again.');
+      setOpen(true)    
+    })
+  }
+
+  const deleteWhishlist = (event, user) => {
+    event.preventDefault();
+
+    axios
+    .delete(`http://localhost:3001/whishlist/clear/${user.id}`)
+    .then(response => {
+      console.log('Whishlist is deleted successfully')
+      window.location = '/whishlist/view'
+    })
+    .catch(error => {
+      setMessage('Whishlist failed to be deleted. Please try again.');
+      setOpen(true)    
+    })
+  }
+
   const classes = useStyles();
 
 return (
   <div>
     <h1>{firstName}'s Wishlist</h1>
+    <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteWhishlist(event, user)}>Delete all</Button>
     <Grid container direction="row">
     { wishlist.map(wishlist => { 
         return(
@@ -120,9 +151,9 @@ return (
                 <Typography variant="body2" color="textSecondary" component="p">
                Property Type: {wishlist.property_id.type}
                 </Typography>
-                
               </CardContent>
             </CardActionArea>
+            <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteProperty(event, user)}>Delete</Button>
           </Card>
       ) 
     }) 
