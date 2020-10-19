@@ -4,7 +4,7 @@ import {
   Button,
   Toolbar,
 } from '@material-ui/core';
-import logo from "../images/michelle-logo.png"
+import logo from "../images/bannerlogo.jpg"
 
 const AppHeader = () => {
   const loggedUserJSON = window.localStorage.getItem('loggedInUser') // get current session user
