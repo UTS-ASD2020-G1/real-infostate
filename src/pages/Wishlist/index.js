@@ -84,9 +84,9 @@ const Wishlist = (props) => {
 
   const deleteProperty = (event, property_id) => {
     event.preventDefault();
-  
+    
     axios
-    .delete(`http://localhost:3001/wishlist/delete/${user.id}`, {data: { id: property_id}})
+    .delete(`http://localhost:3001/wishlist/delete/${user.id}-${property_id}`)
     .then(response => {
       console.log('Property is deleted successfully')
       window.location = '/user/wishlist'
@@ -153,7 +153,7 @@ return (
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteProperty(event, wishlist.property_id)}>Delete</Button>
+            <Button className={classes.button} variant="contained" color="secondary" onClick={(event) => deleteProperty(event, wishlist.property_id.id)}>Delete</Button>
           </Card>
       ) 
     }) 

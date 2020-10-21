@@ -119,22 +119,25 @@ wishlistRouter.get('/view/:user_id', async (req, res) => {
 //@todo
 //@route  DELETE /wishlist/view/
 //@desc   delete a property from wishlist
-wishlistRouter.delete('/delete/:user_id', async (req, res) => {
-  const {property_id}  = req.body;
+wishlistRouter.delete('/delete/:user_id-:property_id', async (req, res) => {
+  const property_id  = req.params.property_id;
   const user_id = req.params.user_id;
 
-  const user = await wishlist.findOne({user_id: user_id});
-
-  try {
-    // delete property which has the matching id
-    await wishlist.findOneAndRemove({user_id: user_id, property_id: property_id});
-    res.status(200).send("The Property has been deleted from your wishlist");
-} catch(error){ // return feedback if operation does not suceed
-    console.log(error)
-    res.status(500).json({
-        error: 'Something Wrong'
-    })
-}
+  if(property_id){
+    try {
+      // delete property which has the matching id
+      await wishlist.findOneAndRemove({user_id: user_id, property_id: property_id});
+      res.status(200).send("The Property has been deleted from your wishlist");
+  } catch(error){ // return feedback if operation does not suceed
+      console.log(error)
+      res.status(500).json({
+          error: 'Something Wrong'
+      })
+  }
+  }
+  else{
+    res.status(404).send('Please Enter a Property Id');
+  }
 });
 
 
