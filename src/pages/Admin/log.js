@@ -45,7 +45,7 @@ const Home = () => {
         log.date = new Date(log.date).toString().substring(0,24)
       })
       // sort logs
-      let sortedLogs = response.data.sort((obj1, obj2) => obj1["date"] < obj2["date"] ? -1 : 1)
+      let sortedLogs = response.data.sort((obj1, obj2) => obj1["date"] > obj2["date"] ? -1 : 1)
       setLogs(sortedLogs)
       setSearchedLogs(sortedLogs)
     })
@@ -90,7 +90,7 @@ const Home = () => {
         return (
         <div>
         {/* Searchbar */}
-        <h1 className={classes.heading}>Find a Property</h1>
+        <h1 className={classes.heading}>Find Logs</h1>
         <div className="Search">
 
           <TextField

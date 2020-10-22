@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   makeStyles
 } from '@material-ui/core';
@@ -17,37 +17,21 @@ const useStyles = makeStyles({
     }
 });
 
-const banneredit = (props) => {
-  const [banner, setBanners] = useState('');
-
-  useEffect(() => {
-    axios
-    .get(`http://localhost:3001/admin/banners/`)
-    .then(response => {
-      console.log('Banner is fetched successfully!')
-      console.log(response.data)
-      setBanners(response.data[0].banner)
-    })
-  )
-
+const Banner = (props) => {
+  const [banner, setBanner] = useState('');
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = useState(false)
 
   const updateBanner = (event) => {
     event.preventDefault()
-
-    const updateBanner = {
-      banner: banner,
-    }
-
-    axios
-    .put(`http://localhost:3001/admin/banner/`, { banner: updateBanner } )
-    .then(response => {
-      console.log('Banner is updated successsfully')
-      window.location='/admin/home'
-    })
-    .catch(error => {
-      setMessage('Banner failed to be updated. Please try again.');
-      setOpen(true)
-    })
+    window.localStorage.setItem('adminBanner', JSON.stringify(banner))
+    // if(window.localStorage.getItem('adminBanner') == banner){
+      setMessage('Banner changed successfully!')
+      setOpen(true)  
+      setTimeout(() => {
+        window.location="/admin/home"
+      },1000)
+    // }
   }
   
   const classes = useStyles();  
@@ -56,11 +40,11 @@ const banneredit = (props) => {
         <div>
           <TextField 
           required 
-          id="standard-required" 
-          label="Banner" 
+          id="standard" 
+          label="Website Banner" 
           defaultValue="None" 
           value={banner} 
-          onChange={(event) => setBanners(event.target.value)}/>
+          onChange={(event) => setBanner(event.target.value)}/>
           <br />
       <Button className={classes.button} variant="contained" color="primary" onClick={(event) => updateBanner(event)}>Save</Button>
       <Button className={classes.button} variant="contained" color="secondary" href={`/admin/home`}>Cancel</Button>
@@ -69,7 +53,7 @@ const banneredit = (props) => {
           onClose={() => setOpen(false)}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description">
-          <DialogTitle id="alert-dialog-title">Error</DialogTitle>
+          <DialogTitle id="alert-dialog-title">Great!</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               {message}
@@ -86,4 +70,4 @@ const banneredit = (props) => {
       );
 }
 
-export default banneredit;
+export default Banner;

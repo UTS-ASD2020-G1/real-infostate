@@ -27,6 +27,7 @@ import AdminLogin from './pages/Admin/login.js';
 import AdminHome from './pages/Admin/home.js';
 import AdminEdit from './pages/Admin/edit.js';
 import AdminLog from './pages/Admin/log.js';
+import AdminBanner from './pages/Admin/banner.js';
 
 // Wishlist
 import Wishlist from './pages/Wishlist';
@@ -59,13 +60,13 @@ const App = ({ classes }) => (
       <Route path="/find/agents" exact component={Agent} />
       <Route path="/find/properties" exact component={Property} />
       <Route path="/user/edit" exact component={UserEdit}/>
+      <Route path="/user/wishlist" exact component={Wishlist} />
       {/* Admin */}
       <Route path="/admin/login" exact component={AdminLogin} />
       <Route path="/admin/home" exact component={AdminHome} />
       <Route path="/admin/user/edit/:id" exact component={AdminEdit} />
-      <Route path="/admin/log" exact component={AdminLog} />
-      {/* Wishlist */}
-      <Route path="/user/wishlist" exact component={Wishlist} />
+      <Route path="/admin/logs" exact component={AdminLog} />
+      <Route path="/admin/banner" exact component={AdminBanner} />
       </>
     </Router>
     </main>
