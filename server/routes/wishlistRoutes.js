@@ -120,6 +120,7 @@ wishlistRouter.get('/view/:user_id', async (req, res) => {
 //@route  DELETE /wishlist/view/
 //@desc   delete a property from wishlist
 wishlistRouter.delete('/delete/:user_id-:property_id', async (req, res) => {
+  //Get user_id and propert_id from the params
   const property_id  = req.params.property_id;
   const user_id = req.params.user_id;
 

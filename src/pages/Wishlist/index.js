@@ -50,6 +50,7 @@ const Wishlist = (props) => {
     const [wishlist, setWishlist] = useState([]) // set all wishlist item
 
     useEffect(() => {
+      //Get current logged in user
       const loggedUserJSON = window.localStorage.getItem('loggedInUser')
       if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON);
@@ -65,6 +66,7 @@ const Wishlist = (props) => {
             setUsername(response.data[0].username)
             setAddress(response.data[0].address)
 
+            //Get all wishlist of current logged in user
             axios
             .get(`http://localhost:3001/wishlist/view/${user.id}`)
             .then(response => {
@@ -81,7 +83,7 @@ const Wishlist = (props) => {
 
   }, [])
 
-
+  //Delete property from wishlist
   const deleteProperty = (event, property_id) => {
     event.preventDefault();
     
@@ -96,6 +98,8 @@ const Wishlist = (props) => {
       setOpen(true)    
     })
   }
+
+  //Clear wishlist (remove all properties from wishlist)
   const deleteWishlist = (event, user) => {
     event.preventDefault();
 
