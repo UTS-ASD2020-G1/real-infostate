@@ -69,10 +69,7 @@ return(
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Call
-              </Button>
-              <Button size="small" color="primary">
-                Email
+              <a href="mailto: abc@example.com">Email</a>
               </Button>
             </CardActions>
           </Card>

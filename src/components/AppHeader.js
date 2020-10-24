@@ -14,7 +14,7 @@ const AppHeader = () => {
       <Toolbar title = "Real-InfoState" style={{background: '#222222'}}>
         <a href="/"><img src={logo} alt="RI-Logo" height="70" width="200"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/find/suburbs"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find Home</Button> </a>  
+        <a href="/find/suburbs"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Suburb Ratings</Button> </a>  
         <a href="/find/agents"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find an Agent</Button> </a>  
         <a href="/news"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>News</Button> </a>  
         <a href="/find/properties"><Button style={{color: '#FFFFFF', margin: "10px", padding: "10px", fontWeight:"bold" }}>Find Properties</Button> </a>  

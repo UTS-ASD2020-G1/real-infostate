@@ -9,7 +9,10 @@ const Footer = () => (
     bottom: '0', 
     textAlign: 'center',  
     margin: "auto"}}>
-    <a style={{ color: "blue" }} onClick={(event) => window.location = "/admin/login"}>Admin Login</a>
+    <a style={{ color: "yellow" }} onClick={(event) => window.location = "/admin/login"}>Admin Login | </a>
+    <a style={{ color: "yellow" }} onClick={(event) => window.location = "/admin/home"}>Admin Home | </a>
+    <a style={{ color: "yellow" }} onClick={(event) => window.location = "/admin/banner"}>Banner</a>
+
     <br />
     © 2020 Advanced Software Development Spring Group 3 
 </footer>

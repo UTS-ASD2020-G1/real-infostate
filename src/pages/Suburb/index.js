@@ -20,6 +20,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
+import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 
 const useStyles = makeStyles({
@@ -96,14 +97,15 @@ const Suburb = () => {
           textAlign: 'center',
           margin: "10px auto"
         }}>
-        Find a Home
+        Suburbs Ratings
       </Typography>
       <header className="App-header">
-        <h2>Find a Home</h2>
+        <h2>Search a Suburbs Rating</h2>
         <div className="Search">
           <TextField
             required
-            style={{ margin: 8 }}
+            style={{ margin: 8,
+            }}
             id="outlined-helperText"
             label="Suburb Name"
             variant="outlined"
