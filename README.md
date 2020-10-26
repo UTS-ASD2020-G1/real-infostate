@@ -21,9 +21,6 @@
 - PaperTrail (Logging)
 - CodeShip (CI)
 
-## API Used
-- 
-
 
 ## Features
 R0:
@@ -39,6 +36,11 @@ R1:
 - News Page Online
 - Property information is linked to MongoDB 
 
+R2:
+- Make Wishlist Add - Remove Function to user
+- Allow Admins to View login logs
+- Allow Admins to change the corresponding Banner 
+- Accessability Update 
 
 ## File Structure
 - **/real-infostate_React_base**
