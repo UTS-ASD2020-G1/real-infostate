@@ -38,7 +38,8 @@ authRouter.post('/login', async (req,res) => {
 
     // put it in success logs
     const log = await Log.create({ user: user, date: new Date(), status: 1})
-
+    log.save();
+    
     // set to 0 if the user login is successful
     try {
         await User.findByIdAndUpdate(user._id, { $set: { loginAttempts: 0 } }) // increment unsuccesful login attempts

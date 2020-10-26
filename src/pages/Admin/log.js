@@ -45,7 +45,7 @@ const Home = () => {
         log.date = new Date(log.date).toString().substring(0,24)
       })
       // sort logs
-      let sortedLogs = response.data.sort((obj1, obj2) => obj1["date"] > obj2["date"] ? -1 : 1)
+      let sortedLogs = response.data.sort((obj1, obj2) => new Date(obj1["date"]) > new Date(obj2["date"]) ? -1 : 1)
       setLogs(sortedLogs)
       setSearchedLogs(sortedLogs)
     })
